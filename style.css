@@ -1,0 +1,55 @@
+.element {
+    cursor: grab
+}
+
+#main {
+    height: 100vh;
+    border: solid 1px black;
+}
+
+.col {
+    min-height: 100px !important;
+    ,
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* X-offset, Y-offset, Blur radius, Spread radius, Color */
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+col:hover {
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    /* Efek bayangan saat hover */
+}
+
+.ul, .li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.caret::before {
+    content: "\25BC";
+    /* Tanda panah ke kanan (Unicode) */
+    margin-right: 6px;
+}
+
+.nested {
+    display: none;
+    margin-left: 20px;
+}
+
+.active {
+    display: block;
+}
+
+.caret-down::before {
+    content: "\25B6";
+
+}
+
+.element {
+    cursor: pointer;
+}
+
+.element:hover {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

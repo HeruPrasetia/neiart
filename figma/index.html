@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <style>
+        .element {
+            cursor: grab
+        }
+
+        #main {
+            height: 100vh;
+            border: solid 1px black;
+        }
+
+        .col{
+            min-height: 100px !important;,
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* X-offset, Y-offset, Blur radius, Spread radius, Color */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        col:hover {
+            box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Efek bayangan saat hover */
+        }
+
+        /* Style untuk daftar pohon */
+        .ul, .li {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Tombol caret (tanda panah) */
+        .caret::before {
+            content: "\25B6"; /* Tanda panah ke kanan (Unicode) */
+            margin-right: 6px;
+        }
+
+        /* Gaya awal untuk daftar tersembunyi */
+        .nested {
+            display: none;
+            margin-left: 20px; /* Indentasi child items */
+        }
+
+        /* Gaya untuk tampilan terbuka */
+        .active {
+            display: block;
+        }
+
+        /* Gaya untuk panah ke bawah saat elemen terbuka */
+        .caret-down::before {
+            content: "\25BC"; /* Tanda panah ke bawah (Unicode) */
+        }
+
+        .element{
+            cursor: pointer;
+        }
+
+        .element:hover{
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        }
+    </style>
+</head>
+
+<body>
+    <p></p>
+    <div class="container-fluit">
+        <div class="row">
+            <div class="col-md-3">
+                <nav>
+                    <div class="nav nav-tabs nav-pills nav-fill" id="nav-tab" role="tablist">
+                        <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                            aria-selected="true">Leyer</button>
+                        <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Element</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div id="divLayout">
+                            <ul class="ul" id="tree"></ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tablle-responsive">
+                            <table class="table table-striped">
+                                <tbody id="tbodyElement"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="main" data-click="false"></div>
+            </div>
+            <div class="col-md-3" style="padding:0;">
+                <div class="card shadow-sm" style="padding:10px" data-click="false">
+                    <div class="card-deaser" data-click="false">
+                        Element Editor
+                    </div>
+                    <div class="card-body" data-click="false">
+                        <div id="divEdit" data-click="false"></div>
+                    </div>
+                </div>
+                <div class="card shadow-sm" style="padding:10px" data-click="false">
+                    <div class="card-deaser" data-click="false">
+                        HTML Editor
+                    </div>
+                    <div class="card-body" data-click="false">
+                        <div class="form-group">
+                            <label>Aksi</label>
+                            <select class="form-select" id="edtOpsi" data-click="false">
+                                <option value="Export JSON">Export JSON</option>
+                                <option value="Export HTML">Export HTML</option>
+                                <option value="Export JSX">Export JSX</option>
+                                <option value="Import JSON">Import JSON</option>
+                                <option value="Import HTML">Import HTML</option>
+                                <option value="Import JSX">Import JSX</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Hasil</label>
+                            <textarea class="form-control" id="edtHasil" rows="10" data-click="false"></textarea>
+                        </div>
+                        <br>
+                        <div class="d-flex gap-1">
+                            <button class="btn btn-primary w-100" id="btnProses">Proses</button>
+                            <button class="btn btn-danger w-100" id="btnReset">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form onsubmit="__handleSaveElm(event)" class="needs-validation" novalidate>
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalLabel">Tambah Element Header</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modalBody"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="btnTutupModal" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let __ElmType = "H",
+            __Elms = localStorage.getItem("Elms") ? JSON.parse(localStorage.getItem("Elms")) : [],
+            arrOption = [], arrTable = [];
+            
+        GI("btnReset").addEventListener("click", ()=>{
+            localStorage.setItem("Elms", []);
+            __Elms = [];
+            main();
+        });
+
+        function rendElm(opt) {
+            let to = opt.to ? opt.to : "none";
+            let div = document.createElement("main");
+            for (let elm of opt.elm) {
+                let cElm = document.createElement(elm.elm);
+                Object.keys(elm).forEach(function (key) {
+                    if (key != "elm") {
+                        if (key == "text") {
+                            cElm.innerText = elm.text;
+                        } else if (key == "html") {
+                            cElm.innerHTML = elm.html;
+                        } else if (key == "cls") {
+                            cElm.className = elm[key];
+                        } else if (key == "attr") {
+                            for (let attr in elm.attr) cElm.setAttribute(attr, elm.attr[attr]);
+                        } else if (key == "style") {
+                            cElm.setAttribute("style", elm.style);
+                        } else if (key == "elms") {
+                            for (let Elm of elm.elms) {
+                                let ss = mm(Elm);
+                                cElm.appendChild(ss);
+                            }
+                        } else {
+                            cElm.setAttribute(key, elm[key]);
+                        }
+                    }
+                })
+                div.appendChild(cElm);
+            }
+
+            function mm(elms) {
+                let elm = document.createElement(elms.elm);
+                Object.keys(elms).forEach(function (key) {
+                    if (key != "elm") {
+                        if (key == "text") {
+                            elm.innerText = elms.text;
+                        } else if (key == "html") {
+                            elm.innerHTML = elms.html;
+                        } else if (key == "cls") {
+                            elm.className = elms[key];
+                        } else if (key == "attr") {
+                            for (let attr in elms.attr) elm.setAttribute(attr, elms.attr[attr]);
+                        } else if (key == "style") {
+                            elm.setAttribute("style", elms.style);
+                        } else if (key == "elms") {
+                            for (let Elm of elms.elms) {
+                                let ss = mm(Elm);
+                                elm.appendChild(ss);
+                            }
+                        } else {
+                            elm.setAttribute(key, elms[key]);
+                        }
+                    }
+                });
+                return elm;
+            }
+
+            if (to != "none") {
+                if (!opt.add) document.querySelectorAll(to)[0].innerHTML = "";
+                let hasil = div.outerHTML.replace("<main>", "");
+                let hasil2 = hasil.replace("</main>", "");
+                document.querySelectorAll(to)[0].innerHTML = hasil2;
+            } else {
+                let hasil = div.outerHTML.replace("<main>", "");
+                let hasil2 = hasil.replace("</main>", "");
+                return hasil2;
+            }
+        }
+
+        function htmlToJson(element) {
+            let result = {};
+            result.elm = element.nodeName;
+            if (element.nodeType === Node.TEXT_NODE) {
+                result.text = element.innerText;
+            } else {
+                let attrs = element.attributes;
+                let attrLength = attrs.length;
+                if (attrLength > 0) {
+                    result.attr = {};
+                    for (let i = 0; i < attrLength; i++) {
+                        result.attr[attrs[i].nodeName] = attrs[i].nodeValue;
+                    }
+                }
+                let childNodes = element.childNodes;
+                let childLength = childNodes.length;
+                if (childNodes[0].nodeName != "#text") {
+                    if (childLength > 0) {
+                        result.elms = [];
+                        for (let j = 0; j < childLength; j++) {
+                            let child = childNodes[j];
+                            if (child.nodeType === Node.ELEMENT_NODE) {
+                                result.elms.push(htmlToJson(child));
+                            } else if (child.nodeName == "#text") {
+                                result.text = child.innerText;
+                            }
+                        }
+                    } else {
+                        result.text = element.innerText;
+                    }
+                } else {
+                    console.log(element.innerText);
+                    result.text = element.innerText;
+                }
+            }
+            return result;
+        }
+
+        function textToHtml(htmlString) {
+            var div = document.createElement('div');
+            div.innerHTML = htmlString.trim();
+            return div.firstChild;
+        }
+
+        function getAllHtmlAttributes() {
+            var element = document.createElement("div");
+            var allAttributes = [];
+
+            for (var attributeName in element) {
+                if (attributeName.indexOf("on") === 0) {
+                    allAttributes.push(attributeName);
+                }
+            }
+
+            var elementWithAttributes = document.createElement("div");
+            for (var i = 0; i < allAttributes.length; i++) {
+                var attributeName = allAttributes[i];
+                elementWithAttributes.setAttribute(attributeName, "");
+            }
+
+            var attributes = elementWithAttributes.attributes;
+            var attributeNames = [];
+            for (var i = 0; i < attributes.length; i++) {
+                attributeNames.push(attributes[i].name);
+            }
+
+            return attributeNames;
+        }
+
+        function pilihElement(elm) {
+            switch(elm){
+                case 'H':{
+                    rendElm({to:"#modalBody", elm:[
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Jenis"},
+                            {elm:"select", id:"edtType", cls:"form-select", elms:[
+                                {elm:"option", value:"H1", text:"H1", id:"H1"},
+                                {elm:"option", value:"H2", text:"H2", id:"H2"},
+                                {elm:"option", value:"H3", text:"H3", id:"H3"},
+                                {elm:"option", value:"H4", text:"H4", id:"H4"},
+                                {elm:"option", value:"H5", text:"H5", id:"H5"},
+                                {elm:"option", value:"H6", text:"H6", id:"H6"},
+                            ]}
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Text"},
+                            {elm:"input", type:"text", id:"edtText", cls:"form-control", required:true},
+                            {elm:"div", cls:"invalid-feedback", text:"Silahkan Masukan Text"}
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"ID"},
+                            {elm:"input", type:"text", id:"edtID", cls:"form-control"},
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Class"},
+                            {elm:"input", type:"text", id:"edtCls", cls:"form-control"},
+                        ]},
+                    ]});
+                }break;
+
+                case 'button':{
+                    rendElm({to:"#modalBody", elm:[
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Jenis"},
+                            {elm:"select", id:"edtType", cls:"form-select", elms:[
+                                {elm:"option", value:"Button", text:"Button", id:"Button"},
+                                {elm:"option", value:"Submit", text:"Submit", id:"Submit"}
+                            ]}
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Text"},
+                            {elm:"input", type:"text", id:"edtText", cls:"form-control", required:true},
+                            {elm:"div", cls:"invalid-feedback", text:"Silahkan Masukan Text"}
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"ID"},
+                            {elm:"input", type:"text", id:"edtID", cls:"form-control"},
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Class"},
+                            {elm:"input", type:"text", id:"edtCls", cls:"form-control", value:"btn btn-primary"},
+                        ]},
+                    ]});
+                }break;
+
+                case 'grid':{
+                    rendElm({to:"#modalBody", elm:[
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Jumlah Grid"},
+                            {elm:"select", id:"edtJumlah", cls:"form-select", elms:[
+                                {elm:"option", value:"1", text:"1 Grid", id:"1"},
+                                {elm:"option", value:"2", text:"2 Grid", id:"2"},
+                                {elm:"option", value:"3", text:"3 Grid", id:"3"},
+                                {elm:"option", value:"4", text:"4 Grid", id:"4"},
+                            ]}
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"ID"},
+                            {elm:"input", type:"text", id:"edtID", cls:"form-control"},
+                        ]},
+                        {elm:"div", id:"divGrid"}
+                    ]});
+
+                    GI("edtJumlah").addEventListener("change", function(){
+                        let grid = [];
+                        for(let i = 0; i< this.value; i++) grid.push({elm:"div", cls:"col mb-2 shadow", elms:[
+                            {elm:"div", text:`Grid ${i}`}
+                        ]})
+                        rendElm({to:"#divGrid", elm:[
+                            {elm:"div", cls:"row", elms:grid}
+                        ]})
+                    });
+                }break;
+
+                case 'table':{
+                    rendElm({to:"#modalBody", elm:[
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"ID"},
+                            {elm:"input", type:"text", id:"edtID", cls:"form-control"},
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Class"},
+                            {elm:"input", type:"text", id:"edtCls", cls:"form-control", value:"table table-striped"},
+                        ]},
+                        {elm:"div", cls:"row", elms:[
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Jumlah Row"},
+                                    {elm:"input", type:"number", cls:"form-control", id:"edtRow", value:"0", required:true},
+                                    {elm:"div", cls:"invalid-feedback", text:"Silahkan Masuka Jumlah Row"}
+                                ]}
+                            ]},
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Jumlah Cell"},
+                                    {elm:"input", type:"number", cls:"form-control", id:"edtCell", value:"0", required:true},
+                                    {elm:"div", cls:"invalid-feedback", text:"Silahkan Masuka Jumlah Cel"}
+                                ]}
+                            ]}
+                        ]},
+                        {elm:"p"},
+                        {elm:"div", cls:"table-responsive", elms:[
+                            {elm:"table", cls:"table table-striped", elms:[
+                                {elm:"thead", cls:"table-light", id:"theadTemplate"},
+                                {elm:"tbody", id:"tbodyTemplate"},
+                            ]}
+                        ]}
+                    ]});
+
+                    GI("edtRow").addEventListener("change", async function(){
+                       let row = this.value;
+                       let cell = GI("edtCell").value;
+                       let thead = [];
+                       let tbody = [];
+                       arrTable = [];
+                       for(let i = 0; i < cell; i++) thead.push({text:"thead " + i});
+                       for(let i = 0; i < row; i++) {
+                         let tBody = [];
+                         for(let ii = 0; ii < cell; ii++) tBody.push({text:"Data " + ii});
+                         tbody.push(tBody);
+                       }
+                       arrTable = {thead:thead, tbody:tbody};
+                       handleRendTable();
+                    });
+
+                    GI("edtCell").addEventListener("change", async function(){
+                       let cell = this.value;
+                       let row = GI("edtRow").value;
+                       let thead = [];
+                       let tbody = [];
+                       arrTable = [];
+                       for(let i = 0; i < cell; i++) thead.push({text:"thead " + i});
+                       for(let i = 0; i < row; i++) {
+                         let tBody = [];
+                         for(let ii = 0; ii < cell; ii++) tBody.push({text:"Data " + ii});
+                         tbody.push(tBody);
+                       }
+                       arrTable = {thead:thead, tbody:tbody};
+                       handleRendTable();
+                    });
+                }break;
+
+                case 'input':{
+                    rendElm({to:"#modalBody", elm:[
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Jenis"},
+                            {elm:"select", id:"edtType", cls:"form-select", elms:[
+                                { elm: "option", value: "Text", text: "Text" },
+                                { elm: "option", value: "Password", text: "Password" },
+                                { elm: "option", value: "Number", text: "Number" },
+                                { elm: "option", value: "Radio", text: "Radio" },
+                                { elm: "option", value: "Checkbox", text: "Checkbox" },
+                                { elm: "option", value: "Textarea", text: "Textarea" },
+                                { elm: "option", value: "Select", text: "Select" },
+                                { elm: "option", value: "File", text: "File" },
+                                { elm: "option", value: "Date", text: "Date" },
+                                { elm: "option", value: "Time", text: "Time" },
+                                { elm: "option", value: "Color", text: "Color" },
+                                { elm: "option", value: "Email", text: "Email" },
+                                { elm: "option", value: "URL", text: "URL" },
+                                { elm: "option", value: "Hidden", text: "Hidden" },
+                                { elm: "option", value: "Search", text: "Search" }
+                            ]}
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Label"},
+                            {elm:"input", type:"text", id:"edtLabel", cls:"form-control", required:true},
+                            {elm:"div", cls:"invalid-feedback", text:"Silahkan Masukan Label"}
+                        ]},
+                        {elm:"div", id:"divOption"},
+                        {elm:"div", cls:"row", elms:[
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Value"},
+                                    {elm:"input", type:"text", id:"edtValue", cls:"form-control"}
+                                ]},
+                            ]},
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Name"},
+                                    {elm:"input", type:"text", id:"edtName", cls:"form-control", required:true},
+                                    {elm:"div", cls:"invalid-feedback", text:"Silahkan Masukan Nama"}
+                                ]},
+                            ]},
+                        ]},
+                        {elm:"div", cls:"row", elms:[
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Max"},
+                                    {elm:"input", type:"number", id:"edtMax", cls:"form-control", disabled:true}
+                                ]},
+                            ]},
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Min"},
+                                    {elm:"input", type:"number", id:"edtMin", cls:"form-control", disabled:true}
+                                ]},
+                            ]},
+                        ]},
+                        {elm:"div", cls:"row", elms:[
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Max Length"},
+                                    {elm:"input", type:"number", id:"edtMaxLength", cls:"form-control"}
+                                ]},
+                            ]},
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Min Length"},
+                                    {elm:"input", type:"number", id:"edtMinLength", cls:"form-control"}
+                                ]},
+                            ]},
+                        ]},
+                        {elm:"div", cls:"row", elms:[
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Placeholder"},
+                                    {elm:"input", type:"text", id:"edtPlaceholder", cls:"form-control"}
+                                ]},
+                            ]},
+                            {elm:"div", cls:"col-md-6 mb-2", elms:[
+                                {elm:"div", cls:"form-group", elms:[
+                                    {elm:"label", text:"Required"},
+                                    {elm:"input", type:"text", id:"edtRequired", cls:"form-control"}
+                                ]},
+                            ]},
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"ID"},
+                            {elm:"input", type:"text", id:"edtID", cls:"form-control"},
+                        ]},
+                        {elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:"Class"},
+                            {elm:"input", type:"text", id:"edtCls", cls:"form-control", value:"form-control"},
+                        ]},
+                    ]});
+
+                    GI('edtType').addEventListener("change", function(){
+                        if(this.value == "Select"){
+                            GI('edtValue').disabled = true;
+                            GI('edtMin').disabled = true;
+                            GI('edtMax').disabled = true;
+                            GI('edtName').disabled = false;
+                            GI('edtLabel').disabled = false;
+                            rendElm({to:"#divOption", elm:[
+                                {elm:"p"},
+                                {elm:"button", type:"button", text:"Tambah Option", cls:"btn btn-sm btn-primary", onclick:"handleAddOption()"},
+                                {elm:"p"},
+                                {elm:"table", cls:"table", elms:[
+                                    {elm:"thead", elms:[
+                                        {elm:"tr", elms:[
+                                            {elm:"tr", elms:[
+                                                {elm:"th", text:"Value"},
+                                                {elm:"th", text:"Text"},
+                                                {elm:"th", text:"ID"},
+                                                {elm:"th", text:""}
+                                            ]}
+                                        ]}
+                                    ]},
+                                    {elm:"tbody", id:"tbodyOption", elms:arrOption.map((tr, i)=>{
+                                        return({elm:"tr", elms:[
+                                            {elm:"td", elms:[
+                                                {elm:"input", cls:"form-control form-control-sm", value:tr.Value, onchange:`changeValueOption(this.value, ${i}, 'Value')`},
+                                            ]},
+                                            {elm:"td", elms:[
+                                                {elm:"input", cls:"form-control form-control-sm", value:tr.Text, onchange:`changeValueOption(this.value, ${i}, 'Text')`},
+                                            ]},
+                                            {elm:"td", elms:[
+                                                {elm:"input", cls:"form-control form-control-sm", value:tr.ID, onchange:`changeValueOption(this.value, ${i}, 'ID')`},
+                                            ]},
+                                            {elm:"td", elms:[
+                                                {elm:"button", type:"button", cls:"btn btn-danger btn-sm", onclick:`handleDeleteOption(${i})`, text:"Hapus"},
+                                            ]}
+                                        ]})
+                                    })}
+                                ]}
+                            ]});
+                        }else if(this.value == "Radio" || this.value == "Checkbox"){
+                            GI('edtValue').disabled = true;
+                            GI('edtMin').disabled = true;
+                            GI('edtMax').disabled = true;
+                            GI('edtName').disabled = true;
+                            GI('edtLabel').disabled = true;
+                            rendElm({to:"#divOption", elm:[
+                                {elm:"p"},
+                                {elm:"button", type:"button", text:"Tambah Option", cls:"btn btn-sm btn-primary", onclick:"handleAddOption()"},
+                                {elm:"p"},
+                                {elm:"table", cls:"table", elms:[
+                                    {elm:"thead", cls:"table-light", elms:[
+                                        {elm:"tr", elms:[
+                                            {elm:"tr", elms:[
+                                                {elm:"th", text:"Value"},
+                                                {elm:"th", text:"Text"},
+                                                {elm:"th", text:"ID"},
+                                                {elm:"th", text:""}
+                                            ]}
+                                        ]}
+                                    ]},
+                                    {elm:"tbody", id:"tbodyOption", elms:arrOption.map((tr, i)=>{
+                                        return({elm:"tr", elms:[
+                                            {elm:"td", elms:[
+                                                {elm:"input", cls:"form-control form-control-sm", value:tr.Value, onchange:`changeValueOption(this.value, ${i}, 'Value')`, required:true},
+                                            ]},
+                                            {elm:"td", elms:[
+                                                {elm:"input", cls:"form-control form-control-sm", value:tr.Text, onchange:`changeValueOption(this.value, ${i}, 'Text')`, required:true},
+                                            ]},
+                                            {elm:"td", elms:[
+                                                {elm:"input", cls:"form-control form-control-sm", value:tr.ID, onchange:`changeValueOption(this.value, ${i}, 'ID')`},
+                                            ]},
+                                            {elm:"td", elms:[
+                                                {elm:"button", type:"button", cls:"btn btn-danger btn-sm", onclick:`handleDeleteOption(${i})`, text:"Hapus"},
+                                            ]}
+                                        ]})
+                                    })}
+                                ]}
+                            ]});
+                        }else if(this.value == "Number"){
+                            GI('edtValue').disabled = false;
+                            GI('edtMin').disabled = false;
+                            GI('edtMax').disabled = false;
+                            GI('edtName').disabled = false;
+                            GI('edtLabel').disabled = false;
+                            GI('divOption').innerHTML = "";
+                        }else if(this.value == "hidden"){
+                            GI('edtValue').disabled = true;
+                            GI('edtMin').disabled = true;
+                            GI('edtMax').disabled = true;
+                            GI('edtName').disabled = false;
+                            GI('edtLabel').disabled = true;
+                            GI('divOption').innerHTML = "";
+                        }else{
+                            GI('edtValue').disabled = false;
+                            GI('edtMin').disabled = true;
+                            GI('edtMax').disabled = true;
+                            GI('edtName').disabled = false;
+                            GI('edtLabel').disabled = false;
+                            GI('divOption').innerHTML = "";
+                        }
+                    });
+                }break;
+            }
+            __ElmType = elm;
+            const myModal = new bootstrap.Modal(GI('modal'), {});
+            myModal.show();
+        }
+
+        function handleChangeValTh(i, val){
+            arrTable.thead[i].text = val;
+            handleRendTable();
+        }
+
+        function handleChangeValTd(i, ii, val){
+            arrTable.tbody[i][ii].text = val;
+            handleRendTable();
+        }
+
+        function handleRendTable(){
+            rendElm({to:"#theadTemplate", elm:[
+                {elm:"tr", elms:arrTable.thead.map((th, i)=>{
+                    return({elm:"th", elms:[
+                        {elm:"input", cls:"form-control form-control-sm", value:th.text, onchange:`handleChangeValTh(${i}, this.value)`}
+                    ]})
+                })}
+            ]});
+
+            rendElm({to:"#tbodyTemplate", elm:[
+                {elm:"tr", elms:arrTable.tbody.map((tr, i)=>{
+                    let tBody = [];
+                    for(let ii in arrTable.tbody[i]) tBody.push({elm:"td", elms:[
+                        {elm:"input", cls:"form-control form-control-sm", value:arrTable.tbody[i][ii].text, onchange:`handleChangeValTd(${i}, ${ii}, this.value)`}
+                    ]});
+
+                    return({elm:"tr", elms:tBody})
+                })}
+            ]});
+        }
+
+        function handleAddOption(){
+            arrOption.push({Value:"", Text:"", ID:""});
+            renderOption();
+        }
+
+        function handleDeleteOption(i){
+            let tmpOption = [];
+            for(let ii in arrOption) if(ii != i) tmpOption.push(arrOption[ii]);
+            arrOption = tmpOption;
+            renderOption();
+        }
+
+        function changeValueOption(val, i, obj){
+            arrOption[i][obj] = val;
+            renderOption();
+        }
+
+        function renderOption(){
+            rendElm({to:"#tbodyOption", elm:arrOption.map((tr, i)=>{
+                return({elm:"tr", elms:[
+                    {elm:"td", elms:[
+                        {elm:"input", cls:"form-control form-control-sm", value:tr.Value, onchange:`changeValueOption(this.value, ${i}, 'Value')`, required:true},
+                    ]},
+                    {elm:"td", elms:[
+                        {elm:"input", cls:"form-control form-control-sm", value:tr.Text, onchange:`changeValueOption(this.value, ${i}, 'Text')`, required:true},
+                    ]},
+                    {elm:"td", elms:[
+                        {elm:"input", cls:"form-control form-control-sm", value:tr.ID, onchange:`changeValueOption(this.value, ${i}, 'ID')`},
+                    ]},
+                    {elm:"td", elms:[
+                        {elm:"button", type:"button", cls:"btn btn-danger btn-sm", onclick:`handleDeleteOption(${i})`, text:"Hapus"},
+                    ]}
+                ]})
+            })});
+        }
+
+        function GI(id) {
+            return document.getElementById(id);
+        }
+
+        function __handleSaveElm(e) {
+            e.preventDefault();
+            if (e.target.checkValidity()) {
+                if (__ElmType == "H") {
+                    let Type = GI('edtType').value;
+                    let Text = GI('edtText').value;
+                    let ID = GI('edtID').value;
+                    let Class = GI('edtCls').value;
+
+                    __Elms.push({elm:Type, text:Text, id:ID, cls:Class});
+                }else if(__ElmType == "input"){
+                    let Type = GI('edtType').value;
+                    let Label = GI('edtLabel').value;
+                    let ID = GI('edtID').value;
+                    let Class = GI('edtCls').value;
+                    let Name = GI('edtName').value;
+                    let Max = GI('edtMax').value;
+                    let Min = GI('edtMin').value;
+                    let Maxlength = GI('edtMaxLength').value;
+                    let Minlength = GI('edtMinLength').value;
+                    let Value = GI('edtValue').value;
+                    let Placeholder = GI('edtPlaceholder').value;
+                    let Required = GI('edtRequired').value;
+
+                    if(Type == "Select"){
+                        __Elms.push({elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:Label},
+                            {elm:"select", type:Type, name:Name, value:Value, id:ID, cls:Class, elms:arrOption.map((opt, i)=>{
+                                return({elm:"option", value:opt.Value, text:opt.Text, ID:opt.ID})
+                            })}
+                        ]});
+                    }else if(Type == "Textarea"){
+                        __Elms.push({elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:Label},
+                            {elm:"textarea", type:Type, name:Name, text:Value, id:ID, cls:Class, placeholder:Placeholder, required:Required != "" ? true : false},
+                            {elm:"div", cls:"invalid-feedback", text:Required}
+                        ]});
+                    }else if(Type == "Radio"){
+                        for(let chk of arrOption){
+                            __Elms.push({elm:"div", cls:"form-check", elms:[
+                                {elm:"label", cls:"form-check-label", for:chk.ID, text:chk.Text},
+                                {elm:"input", type:"radio", name:Name, text:chk.Value, id:chk.ID, cls:"form-check-input"},
+                            ]});
+                        }
+                    }else if(Type == "Number"){
+                        __Elms.push({elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:Label},
+                            {elm:"input", type:Type, name:Name, text:Value, id:ID, cls:Class, placeholder:Placeholder, min:Min, max:Max, required:Required != "" ? true : false},
+                            {elm:"div", cls:"invalid-feedback", text:Required}
+                        ]});
+                    }else{
+                        __Elms.push({elm:"div", cls:"form-group", elms:[
+                            {elm:"label", text:Label},
+                            {elm:"input", type:Type, name:Name, value:Value, id:ID, cls:Class, placeholder:Placeholder, maxlength:Maxlength, minlength:Minlength, required:Required != "" ? true : false},
+                            {elm:"div", cls:"invalid-feedback", text:Required}
+                        ]});
+                    }
+                } else if(__ElmType == "table"){
+                    let ID = GI('edtID').value;
+                    let Class = GI('edtCls').value;
+
+                    __Elms.push({elm:"div", cls:"table-responsive", elms:[
+                        {elm:"table", id:ID, cls:Class, elms:[
+                            {elm:"thead", elms:[
+                                {elm:"tr", elms:arrTable.thead.map((th, i)=>{
+                                    return({elm:"th", text:th.text})
+                                })}
+                            ]},
+                            {elm:"tbody", elms:arrTable.tbody.map((tr, i)=>{
+                                let tbody = [];
+                                for(let tr of arrTable.tbody[i]) tbody.push({elm:"td", text:tr.text});
+                                return({elm:"tr", elms:tbody})
+                            })}
+                        ]}
+                    ]});
+                }else if(__ElmType == "grid"){
+                    let ID = GI('edtID').value;
+                    let Jml = GI('edtJumlah').value;
+                    let grid = [];
+                    for(let i = 0; i < Jml; i++) grid.push({elm:"div", cls:"col mb-2", text:`Grid ${i}`})
+                    __Elms.push({elm:"div", cls:"row", id:ID, elms:grid});
+                }else if(__ElmType == "button"){
+                    let ID = GI('edtID').value;
+                    let Class = GI('edtCls').value;
+                    let Type = GI('edtType').value;
+                    let Text = GI('edtText').value;
+                    
+                    __Elms.push({elm:"button", cls:Class, id:ID, type:Type, text:Text});
+                }
+                localStorage.setItem("Elms", JSON.stringify(__Elms));
+                handleMain();
+                GI('btnTutupModal').click();
+            } else {
+                let forms = document.getElementsByClassName('needs-validation');
+                let validation = Array.prototype.filter.call(forms, function (form) {
+                    form.classList.add('was-validated');
+                });
+            }
+        }
+
+        function handleMain(){
+            rendElm({to:"#main", elm:__Elms});
+            let LI = [], idx = 0;
+            for(let li of __Elms){
+                LI.push({elm:"li", cls:"li", "data-id":idx, elms:li.elms !== undefined ? [
+                    {elm:"span", cls:"caret", "data-id":idx, text:li.elm},
+                    {elm:"ul", cls:"nested", elms:rendChild(li.elms, idx)}
+                ] : [{elm:"h6", cls:"element", "data-id":idx, text:`${li.elm} - ${li.text}`}]})
+
+                idx++;
+            }
+            rendElm({to:"#tree", elm:LI});
+            
+            var toggler = document.getElementsByClassName("caret");
+
+            for (var i = 0; i < toggler.length; i++) {
+                toggler[i].addEventListener("click", function() {
+                    this.parentElement.querySelector(".nested").classList.toggle("active");
+                    this.classList.toggle("caret-down");
+                });
+            }
+
+            let li = document.getElementsByClassName("element");
+            for(let i = 0; i < li.length; i++){
+                li[i].addEventListener("click",countParentNodes)
+            }
+        }
+
+        function rendChild(elms){
+            let UL = [], i = 0
+            for(let ul of elms){
+                UL.push({elm:"li", cls:"li", "data-id":i, elms:ul.elms !== undefined ? [
+                    {elm:"span", cls:"caret", "data-id":i, text:ul.elm},
+                    {elm:"ul", cls:"nested", elms:rendChild(ul.elms)}
+                ] : [{elm:"h6", cls:"element", "data-id":i, text:`${ul.elm} - ${ul.text}`}]})
+
+                i++;
+            }
+            return UL;
+        }
+
+        function countParentNodes(e) {
+            let elm = e.target; // Menggunakan this atau event.target untuk merujuk ke elemen yang memicu event
+            let count = 0;
+            let currentElement = elm;
+            let idx = elm.dataset.id;
+            let ii = [];
+
+            while (currentElement.parentNode) {
+                if (currentElement.id === "tree") {
+                    break; // Hentikan perulangan jika elemen dengan ID "tree" ditemukan
+                }
+                count++;
+                currentElement = currentElement.parentNode;
+                if(currentElement.dataset.id !== undefined) ii.push(parseInt(currentElement.dataset.id));
+                console.log(currentElement);
+            }
+
+            let arr = ii.reverse();
+            console.log(arr);
+            let elll = __Elms;
+            for(let i = 0; i < arr.length; i++){
+                elll = elll.elms !== undefined ? elll.elms[arr[i]] : elll[arr[i]];
+            }
+            console.log(elll);
+        }
+
+        function main() {
+            rendElm({
+                to: "#tbodyElement", elm: [
+                    {elm: "table", cls: "table table-striped table-hovered", elms: [
+                        {elm: "tbody", elms: [
+                            {elm: "tr", onclick: "pilihElement('H')", elms: [
+                                { elm: "td", text: "Header" }
+                            ]},
+                            {elm: "tr", onclick: "pilihElement('input')", elms: [
+                                { elm: "td", text: "Input" }
+                            ]},
+                            {elm: "tr", onclick: "pilihElement('button')", elms: [
+                                { elm: "td", text: "Button" }
+                            ]},
+                            {elm: "tr", onclick: "pilihElement('table')", elms: [
+                                { elm: "td", text: "Table" }
+                            ]},
+                            {elm: "tr", onclick: "pilihElement('grid')", elms: [
+                                { elm: "td", text: "Grid" }
+                            ]},
+                        ]}
+                    ]}
+                ]
+            });
+
+            handleMain();
+        }
+
+        main();
+
+
+        // (function () {
+        //     let dragged, listener;
+        //     dragged = null;
+        //     listener = document.addEventListener;
+        //     listener("dragstart", (event) => {
+        //         return dragged = event.target;
+        //     });
+
+        //     listener("dragend", (event) => {
+        //         return console.log("end !");
+        //     });
+
+        //     listener("dragover", function (event) {
+        //         return event.preventDefault();
+        //     });
+
+        //     listener("drop", (event) => {
+        //         event.preventDefault();
+        //         let html = textToHtml(dragged.innerHTML);
+        //         dragged.parentNode.removeChild(dragged);
+        //         event.target.appendChild(html);
+        //         main();
+        //     });
+
+        //     listener("click", function (event) {
+        //         if (event.target.dataset.click != "false") {
+        //             editElm(event);
+        //         }
+        //     });
+        // }).call(this);
+
+        GI('btnProses').addEventListener("click", function () {
+            let opsi = GI('edtOpsi').value;
+            let edt = GI('edtHasil');
+            if (opsi == "Import HTML") {
+                GI('main').innerHTML = edt.value;
+            } else if (opsi == 'Import JSON') {
+                let elm = JSON.parse(edt.value);
+                rendElm({ to: "#main", elm: elm });
+            } else if (opsi == "Export JSON") {
+                let edt = GI('edtHasil');
+                let json = htmlToJson(GI('main'));
+                edt.value = JSON.stringify(json.elms);
+            }
+        });
+    </script>
+</body>
+
+</html>

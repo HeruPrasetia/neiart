@@ -210,6 +210,62 @@ function pilihElement(elm) {
             });
         } break;
 
+        case 'div':{
+            rendElm({
+                to: "#modalBody", elm: [
+                    {
+                        elm: "div", cls: "form-group", elms: [
+                            { elm: "label", text: "Text" },
+                            { elm: "input", type: "text", id: "edtText", cls: "form-control"}
+                        ]
+                    },
+                    {
+                        elm: "div", cls: "form-group", elms: [
+                            { elm: "label", text: "ID" },
+                            { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                        ]
+                    },
+                    {
+                        elm: "div", cls: "form-group", elms: [
+                            { elm: "label", text: "Class" },
+                            { elm: "input", type: "text", id: "edtCls", cls: "form-control" },
+                        ]
+                    },
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Style" },
+                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                    ]},
+                ]
+            });
+        }break;
+
+        case 'images':{
+            rendElm({
+                to: "#modalBody", elm: [
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "src" },
+                        { elm: "input", type: "text", id: "edtSrc", cls: "form-control"}
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "ID" },
+                        { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Class" },
+                        { elm: "input", type: "text", id: "edtCls", cls: "form-control" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Alt" },
+                        { elm: "input", type: "text", id: "edtAlt", cls: "form-control" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Style" },
+                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                    ]},
+                ]
+            });
+        }break;
+
         case 'input': {
             rendElm({
                 to: "#modalBody", elm: [
@@ -605,7 +661,7 @@ function handleMain() {
     for (let li of __Elms) {
         LI.push({
             elm: "li", cls: "li", "data-id": idx, elms: li.elms !== undefined ? [
-                { elm: "span", cls: "caret element", "data-id": idx, text: li.elm.toUpperCase() },
+                { elm: "span", cls: "caret element", "data-id": idx, text: `${li.elm.toUpperCase()} - .${li.cls} #${li.id}` },
                 { elm: "ul", cls: "nested active", elms: rendChild(li.elms, idx) }
             ] : [{ elm: "h6", cls: "element", "data-id": idx, text: `${li.elm.toUpperCase()} - ${li.text}` }]
         })
@@ -634,7 +690,7 @@ function rendChild(elms) {
     for (let ul of elms) {
         UL.push({
             elm: "li", cls: "li", "data-id": i, elms: ul.elms !== undefined ? [
-                {elm: "span", cls: "caret element", "data-id": i, text: ul.elm.toUpperCase() },
+                {elm: "span", cls: "caret element", "data-id": i, text: `${ul.elm.toUpperCase()} - .${ul.cls} #${ul.id}` },
                 {elm: "ul", cls: "nested active", elms: rendChild(ul.elms) }
             ] : [{ elm: "h6", cls: "element", "data-id": i, text: `${ul.elm.toUpperCase()} - ${ul.text}` }]
         })
@@ -685,11 +741,9 @@ function editElement(e) {
         {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
         {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"}
     ] });
-    rendElm({
-        to: "#divEdit", elm: [
-            { elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
-        ]
-    });
+    rendElm({to: "#divEdit", elm: [
+        { elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
+    ]});
 }
 
 function __handleAddElm(e) {
@@ -722,8 +776,8 @@ function __handleAddElm(e) {
 
             if (Type == "Select") {
                 elmToElm({elm: "div", cls: "form-group", elms: [
-                        { elm: "label", text: Label },
-                        { elm: "select", type: Type, name: Name, value: Value, id: ID, cls: Class, style:Style, elms: arrOption.map((opt, i) => {
+                        {elm: "label", text: Label },
+                        {elm: "select", type: Type, name: Name, value: Value, id: ID, cls: Class, style:Style, elms: arrOption.map((opt, i) => {
                             return ({ elm: "option", value: opt.Value, text: opt.Text, ID: opt.ID })})
                         }
                     ]});
@@ -802,6 +856,21 @@ function __handleAddElm(e) {
             let Style = GI('edtStyle').value;
 
             elmToElm({ elm: "button", cls: Class, id: ID, type: Type, text: Text, style:Style });
+        } else if(__ElmType == "div"){
+            let ID = GI('edtID').value;
+            let Class = GI('edtCls').value;
+            let Text = GI('edtText').value;
+            let Style = GI('edtStyle').value;
+
+            elmToElm({ elm: "div", cls: Class, id: ID, text: Text, style:Style });
+        } else if(__ElmType == "images"){
+            let ID = GI('edtID').value;
+            let Class = GI('edtCls').value;
+            let Src = GI('edtSrc').value;
+            let Style = GI('edtStyle').value;
+            let Alt = GI('edtAlt').value;
+
+            elmToElm({ elm: "img", src:Src, cls: Class, id: ID, alt: Alt, style:Style });
         }
         localStorage.setItem("Elms", JSON.stringify(__Elms));
         handleMain();
@@ -847,23 +916,22 @@ function __handleEditElm(e) {
     if (e.target.checkValidity()) {
         let form = e.target;
         let input = form.querySelectorAll('input[type="text"]');
-        let elll = {};
-        for (let i = 0; i < input.length; i++) {
-            let obj = input[i].name;
-            let val = input[i].value
-            elll[obj] = val;
-        }
 
         let index = "__Elms";
         for(let i in __elmIdx) {
             if(i < __elmIdx.length - 1) {
                 index += `[${__elmIdx[i]}].elms`;
             }else{
-                index += `[${__elmIdx[i]}] = ${JSON.stringify(elll)}`;
+                index += `[${__elmIdx[i]}]`;
             }
         }
 
-        eval(index);
+        for (let i = 0; i < input.length; i++) {
+            let obj = input[i].name;
+            let val = input[i].value;
+            eval(`${index}.${obj} = '${val}'`);
+        }
+
         localStorage.setItem("Elms", JSON.stringify(__Elms));
         handleMain();
     } else {
@@ -892,39 +960,31 @@ function __handleHapusElm(){
 function main() {
     rendElm({
         to: "#tbodyElement", elm: [
-            {
-                elm: "table", cls: "table table-striped table-hovered", elms: [
-                    {
-                        elm: "tbody", elms: [
-                            {
-                                elm: "tr", onclick: "pilihElement('H')", elms: [
-                                    { elm: "td", text: "Header" }
-                                ]
-                            },
-                            {
-                                elm: "tr", onclick: "pilihElement('input')", elms: [
-                                    { elm: "td", text: "Input" }
-                                ]
-                            },
-                            {
-                                elm: "tr", onclick: "pilihElement('button')", elms: [
-                                    { elm: "td", text: "Button" }
-                                ]
-                            },
-                            {
-                                elm: "tr", onclick: "pilihElement('table')", elms: [
-                                    { elm: "td", text: "Table" }
-                                ]
-                            },
-                            {
-                                elm: "tr", onclick: "pilihElement('grid')", elms: [
-                                    { elm: "td", text: "Grid" }
-                                ]
-                            },
-                        ]
-                    }
-                ]
-            }
+            {elm: "table", cls: "table table-striped table-hovered", elms: [
+                {elm: "tbody", elms: [
+                    {elm: "tr", onclick: "pilihElement('H')", elms: [
+                        { elm: "td", text: "Header" }
+                    ]},
+                    {elm: "tr", onclick: "pilihElement('input')", elms: [
+                        { elm: "td", text: "Input" }
+                    ]},
+                    {elm: "tr", onclick: "pilihElement('button')", elms: [
+                        { elm: "td", text: "Button" }
+                    ]},
+                    {elm: "tr", onclick: "pilihElement('table')", elms: [
+                        { elm: "td", text: "Table" }
+                    ]},
+                    {elm: "tr", onclick: "pilihElement('grid')", elms: [
+                        { elm: "td", text: "Grid" }
+                    ]},
+                    {elm: "tr", onclick: "pilihElement('div')", elms: [
+                        { elm: "td", text: "Div" }
+                    ]},
+                    {elm: "tr", onclick: "pilihElement('images')", elms: [
+                        { elm: "td", text: "Images" }
+                    ]}
+                ]}
+            ]}
         ]
     });
 
@@ -935,16 +995,16 @@ main();
 
 GI('btnProses').addEventListener("click", function () {
     let opsi = GI('edtOpsi').value;
-    let edt = GI('edtHasil');
+    let edt = GI("edtHasil");
     if (opsi == "Import HTML") {
         GI('main').innerHTML = edt.value;
     } else if (opsi == 'Import JSON') {
         let elm = JSON.parse(edt.value);
         rendElm({ to: "#main", elm: elm });
     } else if (opsi == "Export JSON") {
-        let edt = GI('edtHasil');
-        let json = htmlToJson(GI('main'));
-        edt.value = JSON.stringify(json.elms);
+        edt.value = JSON.stringify(__Elms);
+    } else if(opsi == "Export HTML"){
+        edt.value = rendElm({elm:__Elms});
     }
 });
 
@@ -953,5 +1013,12 @@ GI("divLayout").addEventListener("click", (e)=>{
         __elmIdx = [];
         let clsActive = document.getElementsByClassName("element-active");
         for (let i = 0; i < clsActive.length; i++) clsActive[i].classList.remove("element-active");
+        GI("divEdit").innerHTML = "";
     }
 });
+
+GI("btnReset").addEventListener("click", ()=>{
+    __Elms = [];
+    localStorage.clear();
+    handleMain();
+})

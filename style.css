@@ -53,3 +53,8 @@ col:hover {
 .element:hover {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+.element-active{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color:#007bff;
+}

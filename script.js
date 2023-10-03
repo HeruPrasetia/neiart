@@ -41,6 +41,10 @@ function pilihElement(elm) {
                             { elm: "input", type: "text", id: "edtCls", cls: "form-control" },
                         ]
                     },
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Style" },
+                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                    ]},
                 ]
             });
         } break;
@@ -54,7 +58,8 @@ function pilihElement(elm) {
                             {
                                 elm: "select", id: "edtType", cls: "form-select", elms: [
                                     { elm: "option", value: "Button", text: "Button", id: "Button" },
-                                    { elm: "option", value: "Submit", text: "Submit", id: "Submit" }
+                                    { elm: "option", value: "Submit", text: "Submit", id: "Submit" },
+                                    { elm: "option", value: "Reset", text: "Reset", id: "Reset" }
                                 ]
                             }
                         ]
@@ -78,6 +83,10 @@ function pilihElement(elm) {
                             { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "btn btn-primary" },
                         ]
                     },
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Style" },
+                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                    ]},
                 ]
             });
         } break;
@@ -104,6 +113,10 @@ function pilihElement(elm) {
                             { elm: "input", type: "text", id: "edtID", cls: "form-control" },
                         ]
                     },
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Style" },
+                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                    ]},
                     { elm: "div", id: "divGrid" }
                 ]
             });
@@ -126,55 +139,41 @@ function pilihElement(elm) {
         case 'table': {
             rendElm({
                 to: "#modalBody", elm: [
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "ID" },
-                            { elm: "input", type: "text", id: "edtID", cls: "form-control" },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Class" },
-                            { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "table table-striped" },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "row", elms: [
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Jumlah Row" },
-                                            { elm: "input", type: "number", cls: "form-control", id: "edtRow", value: "0", required: true },
-                                            { elm: "div", cls: "invalid-feedback", text: "Silahkan Masuka Jumlah Row" }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Jumlah Cell" },
-                                            { elm: "input", type: "number", cls: "form-control", id: "edtCell", value: "0", required: true },
-                                            { elm: "div", cls: "invalid-feedback", text: "Silahkan Masuka Jumlah Cel" }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "ID" },
+                        { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Class" },
+                        { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "table table-striped" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Style" },
+                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                    ]},
+                    {elm: "div", cls: "row", elms: [
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                { elm: "label", text: "Jumlah Row" },
+                                { elm: "input", type: "number", cls: "form-control", id: "edtRow", value: "0", required: true },
+                                { elm: "div", cls: "invalid-feedback", text: "Silahkan Masuka Jumlah Row" }
+                            ]}
+                        ]},
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                { elm: "label", text: "Jumlah Cell" },
+                                { elm: "input", type: "number", cls: "form-control", id: "edtCell", value: "0", required: true },
+                                { elm: "div", cls: "invalid-feedback", text: "Silahkan Masuka Jumlah Cel" }
+                            ]}
+                        ]}
+                    ]},
                     { elm: "p" },
-                    {
-                        elm: "div", cls: "table-responsive", elms: [
-                            {
-                                elm: "table", cls: "table table-striped", elms: [
-                                    { elm: "thead", cls: "table-light", id: "theadTemplate" },
-                                    { elm: "tbody", id: "tbodyTemplate" },
-                                ]
-                            }
-                        ]
-                    }
+                    {elm: "div", cls: "table-responsive", elms: [
+                        {elm: "table", cls: "table table-striped", elms: [
+                            { elm: "thead", cls: "table-light", id: "theadTemplate" },
+                            { elm: "tbody", id: "tbodyTemplate" },
+                        ]}
+                    ]}
                 ]
             });
 
@@ -214,30 +213,26 @@ function pilihElement(elm) {
         case 'input': {
             rendElm({
                 to: "#modalBody", elm: [
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Jenis" },
-                            {
-                                elm: "select", id: "edtType", cls: "form-select", elms: [
-                                    { elm: "option", value: "Text", text: "Text" },
-                                    { elm: "option", value: "Password", text: "Password" },
-                                    { elm: "option", value: "Number", text: "Number" },
-                                    { elm: "option", value: "Radio", text: "Radio" },
-                                    { elm: "option", value: "Checkbox", text: "Checkbox" },
-                                    { elm: "option", value: "Textarea", text: "Textarea" },
-                                    { elm: "option", value: "Select", text: "Select" },
-                                    { elm: "option", value: "File", text: "File" },
-                                    { elm: "option", value: "Date", text: "Date" },
-                                    { elm: "option", value: "Time", text: "Time" },
-                                    { elm: "option", value: "Color", text: "Color" },
-                                    { elm: "option", value: "Email", text: "Email" },
-                                    { elm: "option", value: "URL", text: "URL" },
-                                    { elm: "option", value: "Hidden", text: "Hidden" },
-                                    { elm: "option", value: "Search", text: "Search" }
-                                ]
-                            }
-                        ]
-                    },
+                    {elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "Jenis" },
+                        {elm: "select", id: "edtType", cls: "form-select", elms: [
+                            { elm: "option", value: "Text", text: "Text" },
+                            { elm: "option", value: "Password", text: "Password" },
+                            { elm: "option", value: "Number", text: "Number" },
+                            { elm: "option", value: "Radio", text: "Radio" },
+                            { elm: "option", value: "Checkbox", text: "Checkbox" },
+                            { elm: "option", value: "Textarea", text: "Textarea" },
+                            { elm: "option", value: "Select", text: "Select" },
+                            { elm: "option", value: "File", text: "File" },
+                            { elm: "option", value: "Date", text: "Date" },
+                            { elm: "option", value: "Time", text: "Time" },
+                            { elm: "option", value: "Color", text: "Color" },
+                            { elm: "option", value: "Email", text: "Email" },
+                            { elm: "option", value: "URL", text: "URL" },
+                            { elm: "option", value: "Hidden", text: "Hidden" },
+                            { elm: "option", value: "Search", text: "Search" }
+                        ]}
+                    ]},
                     {
                         elm: "div", cls: "form-group", elms: [
                             { elm: "label", text: "Label" },
@@ -349,12 +344,14 @@ function pilihElement(elm) {
                             { elm: "input", type: "text", id: "edtID", cls: "form-control" },
                         ]
                     },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Class" },
-                            { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "form-control" },
-                        ]
-                    },
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Class" },
+                        { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "form-control" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Style" },
+                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                    ]},
                 ]
             });
 
@@ -602,128 +599,6 @@ function renderOption() {
     });
 }
 
-function __handleSaveElm(e) {
-    e.preventDefault();
-    if (e.target.checkValidity()) {
-        if (__ElmType == "H") {
-            let Type = GI('edtType').value;
-            let Text = GI('edtText').value;
-            let ID = GI('edtID').value;
-            let Class = GI('edtCls').value;
-
-            __Elms.push({ elm: Type, text: Text, id: ID, cls: Class });
-        } else if (__ElmType == "input") {
-            let Type = GI('edtType').value;
-            let Label = GI('edtLabel').value;
-            let ID = GI('edtID').value;
-            let Class = GI('edtCls').value;
-            let Name = GI('edtName').value;
-            let Max = GI('edtMax').value;
-            let Min = GI('edtMin').value;
-            let Maxlength = GI('edtMaxLength').value;
-            let Minlength = GI('edtMinLength').value;
-            let Value = GI('edtValue').value;
-            let Placeholder = GI('edtPlaceholder').value;
-            let Required = GI('edtRequired').value;
-
-            if (Type == "Select") {
-                __Elms.push({
-                    elm: "div", cls: "form-group", elms: [
-                        { elm: "label", text: Label },
-                        {
-                            elm: "select", type: Type, name: Name, value: Value, id: ID, cls: Class, elms: arrOption.map((opt, i) => {
-                                return ({ elm: "option", value: opt.Value, text: opt.Text, ID: opt.ID })
-                            })
-                        }
-                    ]
-                });
-            } else if (Type == "Textarea") {
-                __Elms.push({
-                    elm: "div", cls: "form-group", elms: [
-                        { elm: "label", text: Label },
-                        { elm: "textarea", type: Type, name: Name, text: Value, id: ID, cls: Class, placeholder: Placeholder, required: Required != "" ? true : false },
-                        { elm: "div", cls: "invalid-feedback", text: Required }
-                    ]
-                });
-            } else if (Type == "Radio") {
-                for (let chk of arrOption) {
-                    __Elms.push({
-                        elm: "div", cls: "form-check", elms: [
-                            { elm: "label", cls: "form-check-label", for: chk.ID, text: chk.Text },
-                            { elm: "input", type: "radio", name: Name, text: chk.Value, id: chk.ID, cls: "form-check-input" },
-                        ]
-                    });
-                }
-            } else if (Type == "Number") {
-                __Elms.push({
-                    elm: "div", cls: "form-group", elms: [
-                        { elm: "label", text: Label },
-                        { elm: "input", type: Type, name: Name, text: Value, id: ID, cls: Class, placeholder: Placeholder, min: Min, max: Max, required: Required != "" ? true : false },
-                        { elm: "div", cls: "invalid-feedback", text: Required }
-                    ]
-                });
-            } else {
-                __Elms.push({
-                    elm: "div", cls: "form-group", elms: [
-                        { elm: "label", text: Label },
-                        { elm: "input", type: Type, name: Name, value: Value, id: ID, cls: Class, placeholder: Placeholder, maxlength: Maxlength, minlength: Minlength, required: Required != "" ? true : false },
-                        { elm: "div", cls: "invalid-feedback", text: Required }
-                    ]
-                });
-            }
-        } else if (__ElmType == "table") {
-            let ID = GI('edtID').value;
-            let Class = GI('edtCls').value;
-
-            __Elms.push({
-                elm: "div", cls: "table-responsive", elms: [
-                    {
-                        elm: "table", id: ID, cls: Class, elms: [
-                            {
-                                elm: "thead", elms: [
-                                    {
-                                        elm: "tr", elms: arrTable.thead.map((th, i) => {
-                                            return ({ elm: "th", text: th.text })
-                                        })
-                                    }
-                                ]
-                            },
-                            {
-                                elm: "tbody", elms: arrTable.tbody.map((tr, i) => {
-                                    let tbody = [];
-                                    for (let tr of arrTable.tbody[i]) tbody.push({ elm: "td", text: tr.text });
-                                    return ({ elm: "tr", elms: tbody })
-                                })
-                            }
-                        ]
-                    }
-                ]
-            });
-        } else if (__ElmType == "grid") {
-            let ID = GI('edtID').value;
-            let Jml = GI('edtJumlah').value;
-            let grid = [];
-            for (let i = 0; i < Jml; i++) grid.push({ elm: "div", cls: "col mb-2", text: `Grid ${i}` })
-            __Elms.push({ elm: "div", cls: "row", id: ID, elms: grid });
-        } else if (__ElmType == "button") {
-            let ID = GI('edtID').value;
-            let Class = GI('edtCls').value;
-            let Type = GI('edtType').value;
-            let Text = GI('edtText').value;
-
-            __Elms.push({ elm: "button", cls: Class, id: ID, type: Type, text: Text });
-        }
-        localStorage.setItem("Elms", JSON.stringify(__Elms));
-        handleMain();
-        GI('btnTutupModal').click();
-    } else {
-        let forms = document.getElementsByClassName('needs-validation');
-        let validation = Array.prototype.filter.call(forms, function (form) {
-            form.classList.add('was-validated');
-        });
-    }
-}
-
 function handleMain() {
     rendElm({ to: "#main", elm: __Elms });
     let LI = [], idx = 0;
@@ -759,8 +634,8 @@ function rendChild(elms) {
     for (let ul of elms) {
         UL.push({
             elm: "li", cls: "li", "data-id": i, elms: ul.elms !== undefined ? [
-                { elm: "span", cls: "caret element", "data-id": i, text: ul.elm.toUpperCase() },
-                { elm: "ul", cls: "nested active", elms: rendChild(ul.elms) }
+                {elm: "span", cls: "caret element", "data-id": i, text: ul.elm.toUpperCase() },
+                {elm: "ul", cls: "nested active", elms: rendChild(ul.elms) }
             ] : [{ elm: "h6", cls: "element", "data-id": i, text: `${ul.elm.toUpperCase()} - ${ul.text}` }]
         })
 
@@ -770,7 +645,10 @@ function rendChild(elms) {
 }
 
 function editElement(e) {
+    let clsActive = document.getElementsByClassName("element-active");
+    for (let i = 0; i < clsActive.length; i++) clsActive[i].classList.remove("element-active");
     let elm = e.target;
+    elm.classList.add("element-active");
     let count = 0;
     let currentElement = elm;
     let ii = [];
@@ -805,16 +683,165 @@ function editElement(e) {
     elmToRend.push({ elm: "p" });
     elmToRend.push({ elm:"div", cls:"d-flex", elms:[
         {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
-        {elm: "button", type: "button", onclick:"handleHapusElement()", cls: "btn btn-danger", text: "Hapus"}
+        {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"}
     ] });
     rendElm({
         to: "#divEdit", elm: [
-            { elm: "form", onsubmit: "handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
+            { elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
         ]
     });
 }
 
-function handleEditElm(e) {
+function __handleAddElm(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target.checkValidity()) {
+        if (__ElmType == "H") {
+            let Type = GI('edtType').value;
+            let Text = GI('edtText').value;
+            let ID = GI('edtID').value;
+            let Class = GI('edtCls').value;
+            let Style = GI('edtStyle').value;
+            let elm = {elm:Type, cls:Class, id:ID, text:Text, style:Style};
+            elmToElm(elm);
+        } else if (__ElmType == "input") {
+            let Type = GI('edtType').value;
+            let Label = GI('edtLabel').value;
+            let ID = GI('edtID').value;
+            let Class = GI('edtCls').value;
+            let Name = GI('edtName').value;
+            let Max = GI('edtMax').value;
+            let Min = GI('edtMin').value;
+            let Maxlength = GI('edtMaxLength').value;
+            let Minlength = GI('edtMinLength').value;
+            let Value = GI('edtValue').value;
+            let Placeholder = GI('edtPlaceholder').value;
+            let Required = GI('edtRequired').value;
+            let Style = GI('edtStyle').value;
+            let elm = "";
+
+            if (Type == "Select") {
+                elmToElm({elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: Label },
+                        { elm: "select", type: Type, name: Name, value: Value, id: ID, cls: Class, style:Style, elms: arrOption.map((opt, i) => {
+                            return ({ elm: "option", value: opt.Value, text: opt.Text, ID: opt.ID })})
+                        }
+                    ]});
+            } else if (Type == "Textarea") {
+                elmToElm({elm: "div", cls: "form-group", elms: [
+                            { elm: "label", text: Label },
+                            { elm: "textarea", type: Type, name: Name, text: Value, id: ID, cls: Class, placeholder: Placeholder, style:Style, required: Required != "" ? true : false },
+                            { elm: "div", cls: "invalid-feedback", text: Required }
+                        ]});
+            } else if (Type == "Radio") {
+                for (let chk of arrOption) {
+                    elmToElm({
+                        elm: "div", cls: "form-check", elms: [
+                            { elm: "label", cls: "form-check-label", for: chk.ID, text: chk.Text },
+                            { elm: "input", type: "radio", name: Name, text: chk.Value, id: chk.ID, cls: "form-check-input", style:Style },
+                        ]
+                    });
+                }
+            } else if (Type == "Number") {
+                elmToElm({
+                    elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: Label },
+                        { elm: "input", type: Type, name: Name, text: Value, id: ID, cls: Class, placeholder: Placeholder, min: Min, max: Max, style:Style, required: Required != "" ? true : false },
+                        { elm: "div", cls: "invalid-feedback", text: Required }
+                    ]
+                });
+            } else {
+                elmToElm({
+                    elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: Label },
+                        { elm: "input", type: Type, name: Name, value: Value, id: ID, cls: Class, placeholder: Placeholder, maxlength: Maxlength, minlength: Minlength, style:Style, required: Required != "" ? true : false },
+                        { elm: "div", cls: "invalid-feedback", text: Required }
+                    ]
+                });
+            }
+        } else if (__ElmType == "table") {
+            let ID = GI('edtID').value;
+            let Class = GI('edtCls').value;
+            let Style = GI('edtStyle').value;
+
+            elmToElm({
+                elm: "div", cls: "table-responsive", elms: [
+                    {
+                        elm: "table", id: ID, cls: Class, style:Style, elms: [
+                            {
+                                elm: "thead", elms: [
+                                    {
+                                        elm: "tr", elms: arrTable.thead.map((th, i) => {
+                                            return ({ elm: "th", text: th.text })
+                                        })
+                                    }
+                                ]
+                            },
+                            {
+                                elm: "tbody", elms: arrTable.tbody.map((tr, i) => {
+                                    let tbody = [];
+                                    for (let tr of arrTable.tbody[i]) tbody.push({ elm: "td", text: tr.text });
+                                    return ({ elm: "tr", elms: tbody })
+                                })
+                            }
+                        ]
+                    }
+                ]
+            });
+        } else if (__ElmType == "grid") {
+            let ID = GI('edtID').value;
+            let Jml = GI('edtJumlah').value;
+            let grid = [];
+            for (let i = 0; i < Jml; i++) grid.push({ elm: "div", cls: "col mb-2", text: `Grid ${i}` });
+            elmToElm({ elm: "div", cls: "row", id: ID, elms: grid });
+        } else if (__ElmType == "button") {
+            let ID = GI('edtID').value;
+            let Class = GI('edtCls').value;
+            let Type = GI('edtType').value;
+            let Text = GI('edtText').value;
+            let Style = GI('edtStyle').value;
+
+            elmToElm({ elm: "button", cls: Class, id: ID, type: Type, text: Text, style:Style });
+        }
+        localStorage.setItem("Elms", JSON.stringify(__Elms));
+        handleMain();
+        GI('btnTutupModal').click();
+    } else {
+        let forms = document.getElementsByClassName('needs-validation');
+        let validation = Array.prototype.filter.call(forms, function (form) {
+            form.classList.add('was-validated');
+        });
+    }
+}
+
+function elmToElm(elm){
+    if(__elmIdx.length > 0){
+        let index = "__Elms";
+        for(let i in __elmIdx) {
+            if(i < __elmIdx.length - 1) {
+                index += `[${__elmIdx[i]}].elms`;
+            }else{
+                index += `[${__elmIdx[i]}].elms;`;
+            }
+        }
+
+        let iniElms = eval(index);
+        index = "__Elms";
+        for(let i in __elmIdx) {
+            if(i < __elmIdx.length - 1) {
+                index += `[${__elmIdx[i]}].elms`;
+            }else{
+                index += iniElms === undefined ? `[${__elmIdx[i]}].elms = [${JSON.stringify(elm)}];` : `[${__elmIdx[i]}].elms.push(${JSON.stringify(elm)});`;
+            }
+        }
+
+        eval(index);
+    }else{
+        __Elms.push(elm);
+    }
+}
+
+function __handleEditElm(e) {
     e.stopPropagation();
     e.preventDefault();
     if (e.target.checkValidity()) {
@@ -847,7 +874,7 @@ function handleEditElm(e) {
     }
 }
 
-function handleHapusElement(){
+function __handleHapusElm(){
     let index = "__Elms";
     for(let i in __elmIdx) {
         if(i < __elmIdx.length - 1) {
@@ -918,5 +945,13 @@ GI('btnProses').addEventListener("click", function () {
         let edt = GI('edtHasil');
         let json = htmlToJson(GI('main'));
         edt.value = JSON.stringify(json.elms);
+    }
+});
+
+GI("divLayout").addEventListener("click", (e)=>{
+    if(e.target.id == "divLayout"){
+        __elmIdx = [];
+        let clsActive = document.getElementsByClassName("element-active");
+        for (let i = 0; i < clsActive.length; i++) clsActive[i].classList.remove("element-active");
     }
 });

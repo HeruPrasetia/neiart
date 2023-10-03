@@ -1,46 +1,32 @@
-let __ElmType = "H",
-    __Elms = localStorage.getItem("Elms") ? JSON.parse(localStorage.getItem("Elms")) : [],
-    arrOption = [], arrTable = [], __elmIdx = [];
-
 function pilihElement(elm) {
     switch (elm) {
         case 'H': {
             rendElm({
                 to: "#modalBody", elm: [
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Jenis" },
-                            {
-                                elm: "select", id: "edtType", cls: "form-select", elms: [
-                                    { elm: "option", value: "H1", text: "H1", id: "H1" },
-                                    { elm: "option", value: "H2", text: "H2", id: "H2" },
-                                    { elm: "option", value: "H3", text: "H3", id: "H3" },
-                                    { elm: "option", value: "H4", text: "H4", id: "H4" },
-                                    { elm: "option", value: "H5", text: "H5", id: "H5" },
-                                    { elm: "option", value: "H6", text: "H6", id: "H6" },
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Text" },
-                            { elm: "input", type: "text", id: "edtText", cls: "form-control", required: true },
-                            { elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Text" }
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "ID" },
-                            { elm: "input", type: "text", id: "edtID", cls: "form-control" },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Class" },
-                            { elm: "input", type: "text", id: "edtCls", cls: "form-control" },
-                        ]
-                    },
+                    {elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "Jenis" },
+                        {elm: "select", id: "edtType", cls: "form-select", elms: [
+                            {elm: "option", value: "H1", text: "H1", id: "H1" },
+                            {elm: "option", value: "H2", text: "H2", id: "H2" },
+                            {elm: "option", value: "H3", text: "H3", id: "H3" },
+                            {elm: "option", value: "H4", text: "H4", id: "H4" },
+                            {elm: "option", value: "H5", text: "H5", id: "H5" },
+                            {elm: "option", value: "H6", text: "H6", id: "H6" },
+                        ]}
+                    ]},
+                    { elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "Text" },
+                        {elm: "input", type: "text", id: "edtText", cls: "form-control", required: true },
+                        {elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Text" }
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "ID" },
+                        { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Class" },
+                        { elm: "input", type: "text", id: "edtCls", cls: "form-control" },
+                    ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Style" },
                         { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
@@ -52,37 +38,27 @@ function pilihElement(elm) {
         case 'button': {
             rendElm({
                 to: "#modalBody", elm: [
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Jenis" },
-                            {
-                                elm: "select", id: "edtType", cls: "form-select", elms: [
-                                    { elm: "option", value: "Button", text: "Button", id: "Button" },
-                                    { elm: "option", value: "Submit", text: "Submit", id: "Submit" },
-                                    { elm: "option", value: "Reset", text: "Reset", id: "Reset" }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Text" },
-                            { elm: "input", type: "text", id: "edtText", cls: "form-control", required: true },
-                            { elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Text" }
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "ID" },
-                            { elm: "input", type: "text", id: "edtID", cls: "form-control" },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Class" },
-                            { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "btn btn-primary" },
-                        ]
-                    },
+                    { elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "Jenis" },
+                        {elm: "select", id: "edtType", cls: "form-select", elms: [
+                            { elm: "option", value: "Button", text: "Button", id: "Button" },
+                            { elm: "option", value: "Submit", text: "Submit", id: "Submit" },
+                            { elm: "option", value: "Reset", text: "Reset", id: "Reset" }
+                        ]}
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Text" },
+                        { elm: "input", type: "text", id: "edtText", cls: "form-control", required: true },
+                        { elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Text" }
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "ID" },
+                        { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Class" },
+                        { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "btn btn-primary" },
+                    ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Style" },
                         { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
@@ -94,25 +70,19 @@ function pilihElement(elm) {
         case 'grid': {
             rendElm({
                 to: "#modalBody", elm: [
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Jumlah Grid" },
-                            {
-                                elm: "select", id: "edtJumlah", cls: "form-select", elms: [
-                                    { elm: "option", value: "1", text: "1 Grid", id: "1" },
-                                    { elm: "option", value: "2", text: "2 Grid", id: "2" },
-                                    { elm: "option", value: "3", text: "3 Grid", id: "3" },
-                                    { elm: "option", value: "4", text: "4 Grid", id: "4" },
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "ID" },
-                            { elm: "input", type: "text", id: "edtID", cls: "form-control" },
-                        ]
-                    },
+                    {elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "Jumlah Grid" },
+                        {elm: "select", id: "edtJumlah", cls: "form-select", elms: [
+                            {elm: "option", value: "1", text: "1 Grid", id: "1" },
+                            {elm: "option", value: "2", text: "2 Grid", id: "2" },
+                            {elm: "option", value: "3", text: "3 Grid", id: "3" },
+                            {elm: "option", value: "4", text: "4 Grid", id: "4" },
+                        ]}
+                    ]},
+                    { elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "ID" },
+                        {elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                    ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Style" },
                         { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
@@ -213,24 +183,18 @@ function pilihElement(elm) {
         case 'div':{
             rendElm({
                 to: "#modalBody", elm: [
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Text" },
-                            { elm: "input", type: "text", id: "edtText", cls: "form-control"}
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "ID" },
-                            { elm: "input", type: "text", id: "edtID", cls: "form-control" },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Class" },
-                            { elm: "input", type: "text", id: "edtCls", cls: "form-control" },
-                        ]
-                    },
+                    {elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "Text" },
+                        {elm: "input", type: "text", id: "edtText", cls: "form-control"}
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "ID" },
+                        {elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "Class" },
+                        {elm: "input", type: "text", id: "edtCls", cls: "form-control" },
+                    ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Style" },
                         { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
@@ -272,134 +236,93 @@ function pilihElement(elm) {
                     {elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: "Jenis" },
                         {elm: "select", id: "edtType", cls: "form-select", elms: [
-                            { elm: "option", value: "Text", text: "Text" },
-                            { elm: "option", value: "Password", text: "Password" },
-                            { elm: "option", value: "Number", text: "Number" },
-                            { elm: "option", value: "Radio", text: "Radio" },
-                            { elm: "option", value: "Checkbox", text: "Checkbox" },
-                            { elm: "option", value: "Textarea", text: "Textarea" },
-                            { elm: "option", value: "Select", text: "Select" },
-                            { elm: "option", value: "File", text: "File" },
-                            { elm: "option", value: "Date", text: "Date" },
-                            { elm: "option", value: "Time", text: "Time" },
-                            { elm: "option", value: "Color", text: "Color" },
-                            { elm: "option", value: "Email", text: "Email" },
-                            { elm: "option", value: "URL", text: "URL" },
-                            { elm: "option", value: "Hidden", text: "Hidden" },
-                            { elm: "option", value: "Search", text: "Search" }
+                            {elm: "option", value: "Text", text: "Text" },
+                            {elm: "option", value: "Password", text: "Password" },
+                            {elm: "option", value: "Number", text: "Number" },
+                            {elm: "option", value: "Radio", text: "Radio" },
+                            {elm: "option", value: "Checkbox", text: "Checkbox" },
+                            {elm: "option", value: "Textarea", text: "Textarea" },
+                            {elm: "option", value: "Select", text: "Select" },
+                            {elm: "option", value: "File", text: "File" },
+                            {elm: "option", value: "Date", text: "Date" },
+                            {elm: "option", value: "Time", text: "Time" },
+                            {elm: "option", value: "Color", text: "Color" },
+                            {elm: "option", value: "Email", text: "Email" },
+                            {elm: "option", value: "URL", text: "URL" },
+                            {elm: "option", value: "Hidden", text: "Hidden" },
+                            {elm: "option", value: "Search", text: "Search" }
                         ]}
                     ]},
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "Label" },
-                            { elm: "input", type: "text", id: "edtLabel", cls: "form-control", required: true },
-                            { elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Label" }
-                        ]
-                    },
-                    { elm: "div", id: "divOption" },
-                    {
-                        elm: "div", cls: "row", elms: [
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Value" },
-                                            { elm: "input", type: "text", id: "edtValue", cls: "form-control" }
-                                        ]
-                                    },
-                                ]
-                            },
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Name" },
-                                            { elm: "input", type: "text", id: "edtName", cls: "form-control", required: true },
-                                            { elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Nama" }
-                                        ]
-                                    },
-                                ]
-                            },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "row", elms: [
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Max" },
-                                            { elm: "input", type: "number", id: "edtMax", cls: "form-control", disabled: true }
-                                        ]
-                                    },
-                                ]
-                            },
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Min" },
-                                            { elm: "input", type: "number", id: "edtMin", cls: "form-control", disabled: true }
-                                        ]
-                                    },
-                                ]
-                            },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "row", elms: [
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Max Length" },
-                                            { elm: "input", type: "number", id: "edtMaxLength", cls: "form-control" }
-                                        ]
-                                    },
-                                ]
-                            },
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Min Length" },
-                                            { elm: "input", type: "number", id: "edtMinLength", cls: "form-control" }
-                                        ]
-                                    },
-                                ]
-                            },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "row", elms: [
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Placeholder" },
-                                            { elm: "input", type: "text", id: "edtPlaceholder", cls: "form-control" }
-                                        ]
-                                    },
-                                ]
-                            },
-                            {
-                                elm: "div", cls: "col-md-6 mb-2", elms: [
-                                    {
-                                        elm: "div", cls: "form-group", elms: [
-                                            { elm: "label", text: "Required" },
-                                            { elm: "input", type: "text", id: "edtRequired", cls: "form-control" }
-                                        ]
-                                    },
-                                ]
-                            },
-                        ]
-                    },
-                    {
-                        elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: "ID" },
-                            { elm: "input", type: "text", id: "edtID", cls: "form-control" },
-                        ]
-                    },
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "Label" },
+                        { elm: "input", type: "text", id: "edtLabel", cls: "form-control", required: true },
+                        { elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Label" }
+                    ]},
+                    {elm: "div", id: "divOption" },
+                    {elm: "div", cls: "row", elms: [
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                                {
+                                    elm: "div", cls: "form-group", elms: [
+                                        { elm: "label", text: "Value" },
+                                        { elm: "input", type: "text", id: "edtValue", cls: "form-control" }
+                                    ]
+                                },
+                            ]
+                        },
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                { elm: "label", text: "Name" },
+                                { elm: "input", type: "text", id: "edtName", cls: "form-control", required: true },
+                                { elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Nama" }
+                            ]},
+                        ]},
+                    ]},
+                    {elm: "div", cls: "row", elms: [
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                {elm: "label", text: "Max" },
+                                {elm: "input", type: "number", id: "edtMax", cls: "form-control", disabled: true }
+                            ]},
+                        ]},
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                { elm: "label", text: "Min" },
+                                { elm: "input", type: "number", id: "edtMin", cls: "form-control", disabled: true }
+                            ]},
+                        ]},
+                    ]},
+                    {elm: "div", cls: "row", elms: [
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                { elm: "label", text: "Max Length" },
+                                { elm: "input", type: "number", id: "edtMaxLength", cls: "form-control" }
+                            ]},
+                        ]},
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                { elm: "label", text: "Min Length" },
+                                { elm: "input", type: "number", id: "edtMinLength", cls: "form-control" }
+                            ]},
+                        ]},
+                    ]},
+                    {elm: "div", cls: "row", elms: [
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                { elm: "label", text: "Placeholder" },
+                                { elm: "input", type: "text", id: "edtPlaceholder", cls: "form-control" }
+                            ]},
+                        ]},
+                        {elm: "div", cls: "col-md-6 mb-2", elms: [
+                            {elm: "div", cls: "form-group", elms: [
+                                { elm: "label", text: "Required" },
+                                { elm: "input", type: "text", id: "edtRequired", cls: "form-control" }
+                            ]},
+                        ]},
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "ID" },
+                        { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                    ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Class" },
                         { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "form-control" },
@@ -420,57 +343,39 @@ function pilihElement(elm) {
                     GI('edtLabel').disabled = false;
                     rendElm({
                         to: "#divOption", elm: [
-                            { elm: "p" },
-                            { elm: "button", type: "button", text: "Tambah Option", cls: "btn btn-sm btn-primary", onclick: "handleAddOption()" },
-                            { elm: "p" },
-                            {
-                                elm: "table", cls: "table", elms: [
-                                    {
-                                        elm: "thead", elms: [
-                                            {
-                                                elm: "tr", elms: [
-                                                    {
-                                                        elm: "tr", elms: [
-                                                            { elm: "th", text: "Value" },
-                                                            { elm: "th", text: "Text" },
-                                                            { elm: "th", text: "ID" },
-                                                            { elm: "th", text: "" }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        elm: "tbody", id: "tbodyOption", elms: arrOption.map((tr, i) => {
-                                            return ({
-                                                elm: "tr", elms: [
-                                                    {
-                                                        elm: "td", elms: [
-                                                            { elm: "input", cls: "form-control form-control-sm", value: tr.Value, onchange: `changeValueOption(this.value, ${i}, 'Value')` },
-                                                        ]
-                                                    },
-                                                    {
-                                                        elm: "td", elms: [
-                                                            { elm: "input", cls: "form-control form-control-sm", value: tr.Text, onchange: `changeValueOption(this.value, ${i}, 'Text')` },
-                                                        ]
-                                                    },
-                                                    {
-                                                        elm: "td", elms: [
-                                                            { elm: "input", cls: "form-control form-control-sm", value: tr.ID, onchange: `changeValueOption(this.value, ${i}, 'ID')` },
-                                                        ]
-                                                    },
-                                                    {
-                                                        elm: "td", elms: [
-                                                            { elm: "button", type: "button", cls: "btn btn-danger btn-sm", onclick: `handleDeleteOption(${i})`, text: "Hapus" },
-                                                        ]
-                                                    }
-                                                ]
-                                            })
-                                        })
-                                    }
-                                ]
-                            }
+                            {elm: "p" },
+                            {elm: "button", type: "button", text: "Tambah Option", cls: "btn btn-sm btn-primary", onclick: "handleAddOption()" },
+                            {elm: "p" },
+                            {elm: "table", cls: "table", elms: [
+                                {elm: "thead", elms: [
+                                    {elm: "tr", elms: [
+                                        {elm: "tr", elms: [
+                                            {elm: "th", text: "Value" },
+                                            {elm: "th", text: "Text" },
+                                            {elm: "th", text: "ID" },
+                                            {elm: "th", text: "" }
+                                        ]}
+                                    ]}
+                                ]},
+                                {elm: "tbody", id: "tbodyOption", elms: arrOption.map((tr, i) => {
+                                    return ({
+                                        elm: "tr", elms: [
+                                            {elm: "td", elms: [
+                                                {elm: "input", cls: "form-control form-control-sm", value: tr.Value, onchange: `changeValueOption(this.value, ${i}, 'Value')` },
+                                            ]},
+                                            {elm: "td", elms: [
+                                                {elm: "input", cls: "form-control form-control-sm", value: tr.Text, onchange: `changeValueOption(this.value, ${i}, 'Text')` },
+                                            ]},
+                                            {elm: "td", elms: [
+                                                {elm: "input", cls: "form-control form-control-sm", value: tr.ID, onchange: `changeValueOption(this.value, ${i}, 'ID')` },
+                                            ]},
+                                            {elm: "td", elms: [
+                                                {elm: "button", type: "button", cls: "btn btn-danger btn-sm", onclick: `handleDeleteOption(${i})`, text: "Hapus" },
+                                            ]}
+                                        ]})
+                                    })
+                                }
+                            ]}
                         ]
                     });
                 } else if (this.value == "Radio" || this.value == "Checkbox") {
@@ -481,57 +386,39 @@ function pilihElement(elm) {
                     GI('edtLabel').disabled = true;
                     rendElm({
                         to: "#divOption", elm: [
-                            { elm: "p" },
-                            { elm: "button", type: "button", text: "Tambah Option", cls: "btn btn-sm btn-primary", onclick: "handleAddOption()" },
-                            { elm: "p" },
-                            {
-                                elm: "table", cls: "table", elms: [
-                                    {
-                                        elm: "thead", cls: "table-light", elms: [
-                                            {
-                                                elm: "tr", elms: [
-                                                    {
-                                                        elm: "tr", elms: [
-                                                            { elm: "th", text: "Value" },
-                                                            { elm: "th", text: "Text" },
-                                                            { elm: "th", text: "ID" },
-                                                            { elm: "th", text: "" }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        elm: "tbody", id: "tbodyOption", elms: arrOption.map((tr, i) => {
-                                            return ({
-                                                elm: "tr", elms: [
-                                                    {
-                                                        elm: "td", elms: [
-                                                            { elm: "input", cls: "form-control form-control-sm", value: tr.Value, onchange: `changeValueOption(this.value, ${i}, 'Value')`, required: true },
-                                                        ]
-                                                    },
-                                                    {
-                                                        elm: "td", elms: [
-                                                            { elm: "input", cls: "form-control form-control-sm", value: tr.Text, onchange: `changeValueOption(this.value, ${i}, 'Text')`, required: true },
-                                                        ]
-                                                    },
-                                                    {
-                                                        elm: "td", elms: [
-                                                            { elm: "input", cls: "form-control form-control-sm", value: tr.ID, onchange: `changeValueOption(this.value, ${i}, 'ID')` },
-                                                        ]
-                                                    },
-                                                    {
-                                                        elm: "td", elms: [
-                                                            { elm: "button", type: "button", cls: "btn btn-danger btn-sm", onclick: `handleDeleteOption(${i})`, text: "Hapus" },
-                                                        ]
-                                                    }
-                                                ]
-                                            })
-                                        })
-                                    }
-                                ]
-                            }
+                            {elm: "p" },
+                            {elm: "button", type: "button", text: "Tambah Option", cls: "btn btn-sm btn-primary", onclick: "handleAddOption()" },
+                            {elm: "p" },
+                            {elm: "table", cls: "table", elms: [
+                                {elm: "thead", elms: [
+                                    {elm: "tr", elms: [
+                                        {elm: "tr", elms: [
+                                            {elm: "th", text: "Value" },
+                                            {elm: "th", text: "Text" },
+                                            {elm: "th", text: "ID" },
+                                            {elm: "th", text: "" }
+                                        ]}
+                                    ]}
+                                ]},
+                                {elm: "tbody", id: "tbodyOption", elms: arrOption.map((tr, i) => {
+                                    return ({
+                                        elm: "tr", elms: [
+                                            {elm: "td", elms: [
+                                                {elm: "input", cls: "form-control form-control-sm", value: tr.Value, onchange: `changeValueOption(this.value, ${i}, 'Value')` },
+                                            ]},
+                                            {elm: "td", elms: [
+                                                {elm: "input", cls: "form-control form-control-sm", value: tr.Text, onchange: `changeValueOption(this.value, ${i}, 'Text')` },
+                                            ]},
+                                            {elm: "td", elms: [
+                                                {elm: "input", cls: "form-control form-control-sm", value: tr.ID, onchange: `changeValueOption(this.value, ${i}, 'ID')` },
+                                            ]},
+                                            {elm: "td", elms: [
+                                                {elm: "button", type: "button", cls: "btn btn-danger btn-sm", onclick: `handleDeleteOption(${i})`, text: "Hapus" },
+                                            ]}
+                                        ]})
+                                    })
+                                }
+                            ]}
                         ]
                     });
                 } else if (this.value == "Number") {
@@ -562,6 +449,10 @@ function pilihElement(elm) {
     __ElmType = elm;
     const myModal = new bootstrap.Modal(GI('modal'), {});
     myModal.show();
+    const myModalEl = document.getElementById('modal')
+    myModalEl.addEventListener('hidden.bs.modal', event => {
+        GI("divAddAttribut").innerHTML = "";
+    })
 }
 
 function handleChangeValTh(i, val) {
@@ -591,14 +482,11 @@ function handleRendTable() {
 
     rendElm({
         to: "#tbodyTemplate", elm: [
-            {
-                elm: "tr", elms: arrTable.tbody.map((tr, i) => {
+            {elm: "tr", elms: arrTable.tbody.map((tr, i) => {
                     let tBody = [];
-                    for (let ii in arrTable.tbody[i]) tBody.push({
-                        elm: "td", elms: [
+                    for (let ii in arrTable.tbody[i]) tBody.push({elm: "td", elms: [
                             { elm: "input", cls: "form-control form-control-sm", value: arrTable.tbody[i][ii].text, onchange: `handleChangeValTd(${i}, ${ii}, this.value)` }
-                        ]
-                    });
+                        ]});
 
                     return ({ elm: "tr", elms: tBody })
                 })
@@ -629,11 +517,9 @@ function renderOption() {
         to: "#tbodyOption", elm: arrOption.map((tr, i) => {
             return ({
                 elm: "tr", elms: [
-                    {
-                        elm: "td", elms: [
-                            { elm: "input", cls: "form-control form-control-sm", value: tr.Value, onchange: `changeValueOption(this.value, ${i}, 'Value')`, required: true },
-                        ]
-                    },
+                    {elm: "td", elms: [
+                        { elm: "input", cls: "form-control form-control-sm", value: tr.Value, onchange: `changeValueOption(this.value, ${i}, 'Value')`, required: true },
+                    ]},
                     {
                         elm: "td", elms: [
                             { elm: "input", cls: "form-control form-control-sm", value: tr.Text, onchange: `changeValueOption(this.value, ${i}, 'Text')`, required: true },
@@ -728,8 +614,8 @@ function editElement(e) {
             } else {
                 elmToRend.push({
                     elm: "div", cls: "form-group", elms: [
-                        { elm: "label", text: key.toUpperCase() },
-                        { elm: "input", type: "text", onfocus:"this.select()", cls: "form-control", name: key, value: tempELm[key] }
+                        {elm: "label", text: key.toUpperCase() },
+                        {elm: "input", type: "text", onfocus:"this.select()", cls: "form-control", name: key, value: tempELm[key] }
                     ]
                 });
             }
@@ -772,8 +658,7 @@ function __handleAddElm(e) {
             let Placeholder = GI('edtPlaceholder').value;
             let Required = GI('edtRequired').value;
             let Style = GI('edtStyle').value;
-            let elm = "";
-
+           
             if (Type == "Select") {
                 elmToElm({elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: Label },
@@ -883,33 +768,6 @@ function __handleAddElm(e) {
     }
 }
 
-function elmToElm(elm){
-    if(__elmIdx.length > 0){
-        let index = "__Elms";
-        for(let i in __elmIdx) {
-            if(i < __elmIdx.length - 1) {
-                index += `[${__elmIdx[i]}].elms`;
-            }else{
-                index += `[${__elmIdx[i]}].elms;`;
-            }
-        }
-
-        let iniElms = eval(index);
-        index = "__Elms";
-        for(let i in __elmIdx) {
-            if(i < __elmIdx.length - 1) {
-                index += `[${__elmIdx[i]}].elms`;
-            }else{
-                index += iniElms === undefined ? `[${__elmIdx[i]}].elms = [${JSON.stringify(elm)}];` : `[${__elmIdx[i]}].elms.push(${JSON.stringify(elm)});`;
-            }
-        }
-
-        eval(index);
-    }else{
-        __Elms.push(elm);
-    }
-}
-
 function __handleEditElm(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -955,6 +813,33 @@ function __handleHapusElm(){
     eval(index);
     localStorage.setItem("Elms", JSON.stringify(__Elms));
     handleMain();
+}
+
+function elmToElm(elm){
+    if(__elmIdx.length > 0){
+        let index = "__Elms";
+        for(let i in __elmIdx) {
+            if(i < __elmIdx.length - 1) {
+                index += `[${__elmIdx[i]}].elms`;
+            }else{
+                index += `[${__elmIdx[i]}].elms;`;
+            }
+        }
+
+        let iniElms = eval(index);
+        index = "__Elms";
+        for(let i in __elmIdx) {
+            if(i < __elmIdx.length - 1) {
+                index += `[${__elmIdx[i]}].elms`;
+            }else{
+                index += iniElms === undefined ? `[${__elmIdx[i]}].elms = [${JSON.stringify(elm)}];` : `[${__elmIdx[i]}].elms.push(${JSON.stringify(elm)});`;
+            }
+        }
+
+        eval(index);
+    }else{
+        __Elms.push(elm);
+    }
 }
 
 function main() {
@@ -1019,6 +904,76 @@ GI("divLayout").addEventListener("click", (e)=>{
 
 GI("btnReset").addEventListener("click", ()=>{
     __Elms = [];
+    __elmIdx = [];
     localStorage.clear();
     handleMain();
-})
+});
+
+GI("btnAddAtribut").addEventListener("click", ()=>{
+    GI("divAddAttribut").innerHTML += rendElm({elm:[
+        {"elm": "div", "cls": "row", "id": "", "elms": [
+            {"elm": "div", "cls": "col mb-2", "text": "", "elms": [
+                {"elm": "div", "cls": "form-group", "elms": [
+                    {"elm": "label", "text": "Nama Atribut"},
+                    {"elm": "input", "type": "Text", "name": "attr", "value": "", "id": "", "cls": "form-control add-attr", "placeholder": "Nama Atribut", "maxlength": "", "minlength": "", "style": "", "required": true},
+                    {"elm": "div", "cls": "invalid-feedback", "text": "Silahkan Masukan Nama Atribut"}
+                ]}
+            ]},
+            {"elm": "div", "cls": "col mb-2", "text": "", "elms": [
+                {"elm": "div", "cls": "form-group", "elms": [
+                    {"elm": "label", "text": "Nilai Atribut"},
+                    {"elm": "input", "type": "Text", "name": "value", "value": "", "id": "", "cls": "form-control val-attr", "placeholder": "Nilai Atribut", "maxlength": "", "minlength": "", "style": "", "required": true},
+                    {"elm": "div", "cls": "invalid-feedback", "text": "Silahkan Masukan Nilai Atribut"}
+                ]}
+            ]}
+        ]}
+    ]})
+});
+
+GI("main").addEventListener("click", (e)=>{
+    if(e.target.id != "main"){
+        let elm = e.target;
+        let count = 0;
+        let currentElement = elm;
+        let ii = [];
+
+        while (currentElement.parentNode) {
+            if (currentElement.id === "main") break;
+            let ddd = currentElement;
+            currentElement = currentElement.parentNode;
+            let child = currentElement.children;
+            let anakArray = Array.from(child);
+            let indeks = anakArray.indexOf(ddd);
+            count++;
+            ii.push(indeks);
+        }
+        
+        __elmIdx = ii.reverse();
+        let tempELm = __Elms;
+        for (let i = 0; i < __elmIdx.length; i++) tempELm = tempELm.elms !== undefined ? tempELm.elms[__elmIdx[i]] : tempELm[__elmIdx[i]];
+        let elmToRend = [];
+        for (var key in tempELm) {
+            if (tempELm.hasOwnProperty(key)) {
+                if (key == "elms") {
+                    rendElm({ to: "#divEdit", elm: tempELm.elms });
+                } else {
+                    elmToRend.push({
+                        elm: "div", cls: "form-group", elms: [
+                            {elm: "label", text: key.toUpperCase() },
+                            {elm: "input", type: "text", onfocus:"this.select()", cls: "form-control", name: key, value: tempELm[key] }
+                        ]
+                    });
+                }
+            }
+        }
+
+        elmToRend.push({ elm: "p" });
+        elmToRend.push({ elm:"div", cls:"d-flex", elms:[
+            {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
+            {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"}
+        ] });
+        rendElm({to: "#divEdit", elm: [
+            { elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
+        ]});
+    }
+});

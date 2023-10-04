@@ -709,26 +709,18 @@ function __handleAddElm(e) {
 
             elmToElm({
                 elm: "div", cls: "table-responsive", elms: [
-                    {
-                        elm: "table", id: ID, cls: Class, style:Style, elms: [
-                            {
-                                elm: "thead", elms: [
-                                    {
-                                        elm: "tr", elms: arrTable.thead.map((th, i) => {
-                                            return ({ elm: "th", text: th.text })
-                                        })
-                                    }
-                                ]
-                            },
-                            {
-                                elm: "tbody", elms: arrTable.tbody.map((tr, i) => {
-                                    let tbody = [];
-                                    for (let tr of arrTable.tbody[i]) tbody.push({ elm: "td", text: tr.text });
-                                    return ({ elm: "tr", elms: tbody })
-                                })
-                            }
-                        ]
-                    }
+                    {elm: "table", id: ID, cls: Class, style:Style, elms: [
+                        {elm: "thead", elms: [
+                            {elm: "tr", elms: arrTable.thead.map((th, i) => {
+                                return ({ elm: "th", text: th.text })
+                            })}
+                        ]},
+                        {elm: "tbody", elms: arrTable.tbody.map((tr, i) => {
+                            let tbody = [];
+                            for (let tr of arrTable.tbody[i]) tbody.push({ elm: "td", text: tr.text });
+                            return ({ elm: "tr", elms: tbody })
+                        })}
+                    ]}
                 ]
             });
         } else if (__ElmType == "grid") {
@@ -887,7 +879,7 @@ main();
 
 GI('btnProses').addEventListener("click", function () {
     let opsi = GI('edtOpsi').value;
-    let edt = GI("edtHasil");
+    let edt = GI("edtEditor");
     if (opsi == "Import HTML") {
         const htmlString = "<main>" + edt.value + "</main>";
         const parser = new DOMParser();
@@ -895,14 +887,15 @@ GI('btnProses').addEventListener("click", function () {
         const rootElement = doc.querySelector('main');
 
         const jsonData = htmlToJSON(rootElement);
-        console.log(jsonData);
+        __Elms.push(jsonData);
+        handleMain();
     } else if (opsi == 'Import JSON') {
         let elm = JSON.parse(edt.value);
         rendElm({ to: "#main", elm: elm });
     } else if (opsi == "Export JSON") {
-        edt.value = JSON.stringify(__Elms);
+        edt.valye = JSON.stringify(__Elms);
     } else if(opsi == "Export HTML"){
-        edt.value = rendElm({elm:__Elms});
+        edt.value = document.getElementById('main').innerHTML;
     }
 });
 

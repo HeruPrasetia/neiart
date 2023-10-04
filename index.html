@@ -12,6 +12,12 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <link href="style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
+    <link rel="stylesheet" href="https://codemirror.net/5/theme/cobalt.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/css/css.min.js"></script>
+    <script src="https://codemirror.net/5/mode/css/css.js"></script>
 </head>
 
 <body>
@@ -66,7 +72,7 @@
                         </div>
                         <div class="form-group">
                             <label>Hasil</label>
-                            <textarea class="form-control" id="edtHasil" rows="10"></textarea>
+                            <textarea class="form-control" id="edtEditor" rows="10"></textarea>
                         </div>
                         <br>
                         <div class="d-flex gap-1">
@@ -103,6 +109,16 @@
     </div>
     <script src="modul.js"></script>
     <script src="script.js"></script>
+    <script>
+        var myTextarea = document.getElementById("edtEditor");
+        var myCodeMirror = CodeMirror.fromTextArea(myTextarea, {
+            mode: "css", // Mode syntax highlighting, ganti sesuai bahasa yang Anda inginkan
+            theme: "cobalt", // Ganti tema sesuai keinginan Anda
+            lineNumbers: true, // Menampilkan baris nomor
+            extraKeys: {"Ctrl-Space": "autocomplete"}
+            // Konfigurasi lainnya sesuai kebutuhan Anda
+        });
+    </script>
 </body>
 
 </html>

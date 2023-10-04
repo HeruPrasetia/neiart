@@ -1,8 +1,7 @@
 let __ElmType = "H",
     __Elms = localStorage.getItem("Elms") ? JSON.parse(localStorage.getItem("Elms")) : [],
     arrOption = [], arrTable = [], __elmIdx = [];
-
-// console.log(__Elms);
+console.log(__Elms);
 
 function rendElm(opt) {
     let to = opt.to ? opt.to : "none";
@@ -73,7 +72,7 @@ function rendElm(opt) {
     }
 }
 
-function htmlToJson(element) {
+function htmlToJson2(element) {
     let result = {};
     result.elm = element.nodeName;
     if (element.nodeType === Node.TEXT_NODE) {
@@ -107,6 +106,36 @@ function htmlToJson(element) {
         }
     }
     return result;
+}
+
+function htmlToJSON(element) {
+    const json = {};
+
+    // Mengambil tag name elemen HTML
+    json.elm = element.tagName.toLowerCase();
+
+    // Mengambil teks jika ada
+    const text = element.textContent.trim();
+    if (text) {
+        json.text = text;
+    }
+
+    // Menambahkan atribut-atribut elemen ke dalam objek JSON
+    for (const attr of element.attributes) {
+        json[attr.name] = attr.value;
+    }
+
+    // Mengecek apakah elemen memiliki elemen anak (children)
+    if (element.children.length > 0) {
+        json.elms = [];
+
+        // Mengonversi elemen anak menjadi data JSON rekursif
+        for (const child of element.children) {
+            json.elms.push(htmlToJSON(child));
+        }
+    }
+
+    return json;
 }
 
 function textToHtml(htmlString) {

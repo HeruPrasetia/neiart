@@ -469,29 +469,26 @@ function handleChangeValTd(i, ii, val) {
 function handleRendTable() {
     rendElm({
         to: "#theadTemplate", elm: [
-            {
-                elm: "tr", elms: arrTable.thead.map((th, i) => {
-                    return ({
-                        elm: "th", elms: [
-                            { elm: "input", cls: "form-control form-control-sm", value: th.text, onchange: `handleChangeValTh(${i}, this.value)` }
-                        ]
-                    })
+            {elm: "tr", elms: arrTable.thead.map((th, i) => {
+                return ({
+                    elm: "th", elms: [
+                        { elm: "input", cls: "form-control form-control-sm", value: th.text, onchange: `handleChangeValTh(${i}, this.value)` }
+                    ]
                 })
-            }
+            })}
         ]
     });
 
     rendElm({
         to: "#tbodyTemplate", elm: [
             {elm: "tr", elms: arrTable.tbody.map((tr, i) => {
-                    let tBody = [];
-                    for (let ii in arrTable.tbody[i]) tBody.push({elm: "td", elms: [
-                            { elm: "input", cls: "form-control form-control-sm", value: arrTable.tbody[i][ii].text, onchange: `handleChangeValTd(${i}, ${ii}, this.value)` }
-                        ]});
+                let tBody = [];
+                for (let ii in arrTable.tbody[i]) tBody.push({elm: "td", elms: [
+                        { elm: "input", cls: "form-control form-control-sm", value: arrTable.tbody[i][ii].text, onchange: `handleChangeValTd(${i}, ${ii}, this.value)` }
+                    ]});
 
-                    return ({ elm: "tr", elms: tBody })
-                })
-            }
+                return ({ elm: "tr", elms: tBody })
+            })}
         ]
     });
 }
@@ -625,8 +622,13 @@ function editElement(e) {
 
     elmToRend.push({ elm: "p" });
     elmToRend.push({ elm:"div", cls:"d-flex", elms:[
-        {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
-        {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"}
+        {elm:"div", id:"divAddAttrEdit"},
+        {elm:"p"},
+        {elm:"div", cls:"d-flex justofy-content-center align-items-center gap-1", elms:[
+            {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
+            {elm: "button", type: "button", onclick:"__handleAddAttr('divAddAttrEdit')", cls: "btn btn-warning", text: "Tambah Atribut"},
+            {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"},
+        ]}
     ] });
     rendElm({to: "#divEdit", elm: [
         { elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
@@ -670,33 +672,33 @@ function __handleAddElm(e) {
                     ]});
             } else if (Type == "Textarea") {
                 elmToElm({elm: "div", cls: "form-group", elms: [
-                            { elm: "label", text: Label },
-                            { elm: "textarea", type: Type, name: Name, text: Value, id: ID, cls: Class, placeholder: Placeholder, style:Style, required: Required != "" ? true : false },
-                            { elm: "div", cls: "invalid-feedback", text: Required }
+                            {elm: "label", text: Label },
+                            {elm: "textarea", type: Type, name: Name, text: Value, id: ID, cls: Class, placeholder: Placeholder, style:Style, required: Required != "" ? true : false },
+                            {elm: "div", cls: "invalid-feedback", text: Required }
                         ]});
             } else if (Type == "Radio") {
                 for (let chk of arrOption) {
                     elmToElm({
                         elm: "div", cls: "form-check", elms: [
-                            { elm: "label", cls: "form-check-label", for: chk.ID, text: chk.Text },
-                            { elm: "input", type: "radio", name: Name, text: chk.Value, id: chk.ID, cls: "form-check-input", style:Style },
+                            {elm: "label", cls: "form-check-label", for: chk.ID, text: chk.Text },
+                            {elm: "input", type: "radio", name: Name, text: chk.Value, id: chk.ID, cls: "form-check-input", style:Style },
                         ]
                     });
                 }
             } else if (Type == "Number") {
                 elmToElm({
                     elm: "div", cls: "form-group", elms: [
-                        { elm: "label", text: Label },
-                        { elm: "input", type: Type, name: Name, text: Value, id: ID, cls: Class, placeholder: Placeholder, min: Min, max: Max, style:Style, required: Required != "" ? true : false },
-                        { elm: "div", cls: "invalid-feedback", text: Required }
+                        {elm: "label", text: Label },
+                        {elm: "input", type: Type, name: Name, text: Value, id: ID, cls: Class, placeholder: Placeholder, min: Min, max: Max, style:Style, required: Required != "" ? true : false },
+                        {elm: "div", cls: "invalid-feedback", text: Required }
                     ]
                 });
             } else {
                 elmToElm({
                     elm: "div", cls: "form-group", elms: [
-                        { elm: "label", text: Label },
-                        { elm: "input", type: Type, name: Name, value: Value, id: ID, cls: Class, placeholder: Placeholder, maxlength: Maxlength, minlength: Minlength, style:Style, required: Required != "" ? true : false },
-                        { elm: "div", cls: "invalid-feedback", text: Required }
+                        {elm: "label", text: Label },
+                        {elm: "input", type: Type, name: Name, value: Value, id: ID, cls: Class, placeholder: Placeholder, maxlength: Maxlength, minlength: Minlength, style:Style, required: Required != "" ? true : false },
+                        {elm: "div", cls: "invalid-feedback", text: Required }
                     ]
                 });
             }
@@ -793,6 +795,8 @@ function __handleEditElm(e) {
             eval(`${index}["${obj}"] = '${val}'`);
         }
 
+        GI("formEditElm").innerHTML = "";
+
         localStorage.setItem("Elms", JSON.stringify(__Elms));
         handleMain();
     } else {
@@ -885,7 +889,13 @@ GI('btnProses').addEventListener("click", function () {
     let opsi = GI('edtOpsi').value;
     let edt = GI("edtHasil");
     if (opsi == "Import HTML") {
-        GI('main').innerHTML = edt.value;
+        const htmlString = "<main>" + edt.value + "</main>";
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        const rootElement = doc.querySelector('main');
+
+        const jsonData = htmlToJSON(rootElement);
+        console.log(jsonData);
     } else if (opsi == 'Import JSON') {
         let elm = JSON.parse(edt.value);
         rendElm({ to: "#main", elm: elm });
@@ -913,7 +923,11 @@ GI("btnReset").addEventListener("click", ()=>{
 });
 
 GI("btnAddAtribut").addEventListener("click", ()=>{
-    GI("divAddAttribut").innerHTML += rendElm({elm:[
+    __handleAddAttr("divAddAttribut");
+});
+
+function __handleAddAttr(div){
+    GI(div).innerHTML += rendElm({elm:[
         {"elm": "div", "cls": "row", "id": "", "elms": [
             {"elm": "div", "cls": "col mb-2", "text": "", "elms": [
                 {"elm": "div", "cls": "form-group", "elms": [
@@ -931,7 +945,7 @@ GI("btnAddAtribut").addEventListener("click", ()=>{
             ]}
         ]}
     ]})
-});
+}
 
 GI("main").addEventListener("click", (e)=>{
     if(e.target.id != "main"){
@@ -972,8 +986,13 @@ GI("main").addEventListener("click", (e)=>{
 
         elmToRend.push({ elm: "p" });
         elmToRend.push({ elm:"div", cls:"d-flex", elms:[
-            {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
-            {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"}
+            {elm:"div", id:"divAddAttrEdit"},
+            {elm:"p"},
+            {elm:"div", cls:"d-flex justofy-content-center align-items-center gap-1", elms:[
+                {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
+                {elm: "button", type: "button", onclick:"__handleAddAttr('divAddAttrEdit')", cls: "btn btn-warning", text: "Tambah Atribut"},
+                {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"},
+            ]}
         ] });
         rendElm({to: "#divEdit", elm: [
             { elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }

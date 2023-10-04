@@ -5,7 +5,7 @@ function pilihElement(elm) {
                 to: "#modalBody", elm: [
                     {elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: "Jenis" },
-                        {elm: "select", id: "edtType", cls: "form-select", elms: [
+                        {elm: "select", id: "edtType", name:"elm", cls: "form-select cls-input", elms: [
                             {elm: "option", value: "H1", text: "H1", id: "H1" },
                             {elm: "option", value: "H2", text: "H2", id: "H2" },
                             {elm: "option", value: "H3", text: "H3", id: "H3" },
@@ -16,20 +16,20 @@ function pilihElement(elm) {
                     ]},
                     { elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: "Text" },
-                        {elm: "input", type: "text", id: "edtText", cls: "form-control", required: true },
+                        {elm: "input", type: "text", id: "edtText", name:"text", cls: "form-control cls-input", required: true },
                         {elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Text" }
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "ID" },
-                        { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtID", name:"id", cls: "form-control cls-input" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Class" },
-                        { elm: "input", type: "text", id: "edtCls", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtCls", name:"cls", cls: "form-control cls-input" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Style" },
-                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtStyle", name:"style", cls: "form-control cls-input" },
                     ]},
                 ]
             });
@@ -38,9 +38,10 @@ function pilihElement(elm) {
         case 'button': {
             rendElm({
                 to: "#modalBody", elm: [
-                    { elm: "div", cls: "form-group", elms: [
+                    {elm:"input", type:"hidden", name:"elm", value:"button", cls:"cls-input"},
+                    {elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: "Jenis" },
-                        {elm: "select", id: "edtType", cls: "form-select", elms: [
+                        {elm: "select", id: "edtType", name:"type", cls: "form-select cls-input", elms: [
                             { elm: "option", value: "Button", text: "Button", id: "Button" },
                             { elm: "option", value: "Submit", text: "Submit", id: "Submit" },
                             { elm: "option", value: "Reset", text: "Reset", id: "Reset" }
@@ -48,20 +49,20 @@ function pilihElement(elm) {
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Text" },
-                        { elm: "input", type: "text", id: "edtText", cls: "form-control", required: true },
+                        { elm: "input", type: "text", id: "edtText", name:"text", cls: "form-control cls-input", required: true },
                         { elm: "div", cls: "invalid-feedback", text: "Silahkan Masukan Text" }
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "ID" },
-                        { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtID", name:"id", cls: "form-control cls-input" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Class" },
-                        { elm: "input", type: "text", id: "edtCls", cls: "form-control", value: "btn btn-primary" },
+                        { elm: "input", type: "text", id: "edtCls", name:"cls", cls: "form-control cls-input", value: "btn btn-primary" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Style" },
-                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtStyle", name:"style", cls: "form-control cls-input" },
                     ]},
                 ]
             });
@@ -185,19 +186,19 @@ function pilihElement(elm) {
                 to: "#modalBody", elm: [
                     {elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: "Text" },
-                        {elm: "input", type: "text", id: "edtText", cls: "form-control"}
+                        {elm: "input", type: "text", id: "edtText", name:"text", cls: "form-control cls-input"}
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: "ID" },
-                        {elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                        {elm: "input", type: "text", id: "edtID", name:"id", cls: "form-control cls-input" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: "Class" },
-                        {elm: "input", type: "text", id: "edtCls", cls: "form-control" },
+                        {elm: "input", type: "text", id: "edtCls", name:"cls", cls: "form-control cls-input" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Style" },
-                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtStyle", name:"style", cls: "form-control cls-input" },
                     ]},
                 ]
             });
@@ -208,23 +209,23 @@ function pilihElement(elm) {
                 to: "#modalBody", elm: [
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "src" },
-                        { elm: "input", type: "text", id: "edtSrc", cls: "form-control"}
+                        { elm: "input", type: "text", id: "edtSrc", name:"src", cls: "form-control cls-input"}
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "ID" },
-                        { elm: "input", type: "text", id: "edtID", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtID", name:"id", cls: "form-control cls-input" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Class" },
-                        { elm: "input", type: "text", id: "edtCls", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtCls", name:"cls", cls: "form-control cls-input" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Alt" },
-                        { elm: "input", type: "text", id: "edtAlt", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtAlt", name:"alt", cls: "form-control cls-input" },
                     ]},
                     {elm: "div", cls: "form-group", elms: [
                         { elm: "label", text: "Style" },
-                        { elm: "input", type: "text", id: "edtStyle", cls: "form-control" },
+                        { elm: "input", type: "text", id: "edtStyle", name:"style", cls: "form-control cls-input" },
                     ]},
                 ]
             });
@@ -636,14 +637,15 @@ function __handleAddElm(e) {
     e.preventDefault();
     e.stopPropagation();
     if (e.target.checkValidity()) {
+        let ELM = {};
         if (__ElmType == "H") {
-            let Type = GI('edtType').value;
-            let Text = GI('edtText').value;
-            let ID = GI('edtID').value;
-            let Class = GI('edtCls').value;
-            let Style = GI('edtStyle').value;
-            let elm = {elm:Type, cls:Class, id:ID, text:Text, style:Style};
-            elmToElm(elm);
+            let form = GI("modalBody");
+            let input = form.getElementsByClassName("cls-input");
+            for (let i = 0; i < input.length; i++) ELM[input[i].name] = input[i].value;
+            let addAttr = document.getElementsByClassName("add-attr");
+            let valAttr = document.getElementsByClassName("val-attr");
+            for (let i = 0; i < addAttr.length; i++) ELM[addAttr[i].value] = valAttr[i].value;
+            elmToElm(ELM);
         } else if (__ElmType == "input") {
             let Type = GI('edtType').value;
             let Label = GI('edtLabel').value;
@@ -734,28 +736,29 @@ function __handleAddElm(e) {
             for (let i = 0; i < Jml; i++) grid.push({ elm: "div", cls: "col mb-2", text: `Grid ${i}` });
             elmToElm({ elm: "div", cls: "row", id: ID, elms: grid });
         } else if (__ElmType == "button") {
-            let ID = GI('edtID').value;
-            let Class = GI('edtCls').value;
-            let Type = GI('edtType').value;
-            let Text = GI('edtText').value;
-            let Style = GI('edtStyle').value;
-
-            elmToElm({ elm: "button", cls: Class, id: ID, type: Type, text: Text, style:Style });
+            let form = GI("modalBody");
+            let input = form.getElementsByClassName("cls-input");
+            for (let i = 0; i < input.length; i++) ELM[input[i].name] = input[i].value;
+            let addAttr = document.getElementsByClassName("add-attr");
+            let valAttr = document.getElementsByClassName("val-attr");
+            for (let i = 0; i < addAttr.length; i++) ELM[addAttr[i].value] = valAttr[i].value;
+            elmToElm(ELM);
         } else if(__ElmType == "div"){
-            let ID = GI('edtID').value;
-            let Class = GI('edtCls').value;
-            let Text = GI('edtText').value;
-            let Style = GI('edtStyle').value;
-
-            elmToElm({ elm: "div", cls: Class, id: ID, text: Text, style:Style });
+            let form = GI("modalBody");
+            let input = form.getElementsByClassName("cls-input");
+            for (let i = 0; i < input.length; i++) ELM[input[i].name] = input[i].value;
+            let addAttr = document.getElementsByClassName("add-attr");
+            let valAttr = document.getElementsByClassName("val-attr");
+            for (let i = 0; i < addAttr.length; i++) ELM[addAttr[i].value] = valAttr[i].value;
+            elmToElm(ELM);
         } else if(__ElmType == "images"){
-            let ID = GI('edtID').value;
-            let Class = GI('edtCls').value;
-            let Src = GI('edtSrc').value;
-            let Style = GI('edtStyle').value;
-            let Alt = GI('edtAlt').value;
-
-            elmToElm({ elm: "img", src:Src, cls: Class, id: ID, alt: Alt, style:Style });
+            let form = GI("modalBody");
+            let input = form.getElementsByClassName("cls-input");
+            for (let i = 0; i < input.length; i++) ELM[input[i].name] = input[i].value;
+            let addAttr = document.getElementsByClassName("add-attr");
+            let valAttr = document.getElementsByClassName("val-attr");
+            for (let i = 0; i < addAttr.length; i++) ELM[addAttr[i].value] = valAttr[i].value;
+            elmToElm(ELM);
         }
         localStorage.setItem("Elms", JSON.stringify(__Elms));
         handleMain();
@@ -787,7 +790,7 @@ function __handleEditElm(e) {
         for (let i = 0; i < input.length; i++) {
             let obj = input[i].name;
             let val = input[i].value;
-            eval(`${index}.${obj} = '${val}'`);
+            eval(`${index}["${obj}"] = '${val}'`);
         }
 
         localStorage.setItem("Elms", JSON.stringify(__Elms));

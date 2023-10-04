@@ -2,6 +2,8 @@ let __ElmType = "H",
     __Elms = localStorage.getItem("Elms") ? JSON.parse(localStorage.getItem("Elms")) : [],
     arrOption = [], arrTable = [], __elmIdx = [];
 
+// console.log(__Elms);
+
 function rendElm(opt) {
     let to = opt.to ? opt.to : "none";
     let div = document.createElement("main");

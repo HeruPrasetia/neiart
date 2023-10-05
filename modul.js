@@ -86,7 +86,7 @@ function htmlToJSON(element) {
             json.elms.push(htmlToJSON(child));
         }
     }else{
-        json.text = element.innerText;
+        json.text = element.innerText.trim();
     }
 
     return json;

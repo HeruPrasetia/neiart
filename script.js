@@ -877,27 +877,37 @@ function main() {
 
 main();
 
-GI('btnProses').addEventListener("click", function () {
-    let opsi = GI('edtOpsi').value;
-    let edt = GI("edtEditor");
-    if (opsi == "Import HTML") {
-        const htmlString = "<main>" + edt.value + "</main>";
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        const rootElement = doc.querySelector('main');
+function __handleExIm(e){
+    e.stopPropagation();
+    e.preventDefault();
+    if(e.target.checkValidity()){
+        let opsi = GI('edtOpsi').value;
+        let edt = GI("edtEditor");
+        if (opsi == "Import HTML") {
+            const htmlString = "<main>" + edt.value + "</main>";
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const rootElement = doc.querySelector('main');
 
-        const jsonData = htmlToJSON(rootElement);
-        __Elms.push(jsonData);
-        handleMain();
-    } else if (opsi == 'Import JSON') {
-        let elm = JSON.parse(edt.value);
-        rendElm({ to: "#main", elm: elm });
-    } else if (opsi == "Export JSON") {
-        edt.valye = JSON.stringify(__Elms);
-    } else if(opsi == "Export HTML"){
-        edt.value = document.getElementById('main').innerHTML;
+            const jsonData = htmlToJSON(rootElement);
+            __Elms.push(jsonData);
+            handleMain();
+        } else if (opsi == 'Import JSON') {
+            let elm = JSON.parse(edt.value);
+            rendElm({ to: "#main", elm: elm });
+        } else if (opsi == "Export JSON") {
+            edt.valye = JSON.stringify(__Elms);
+        } else if(opsi == "Export HTML"){
+            edt.value = document.getElementById('main').innerHTML;
+        }
+        GI("btnTutupModalExIm").click();
+    }else{
+        let forms = document.getElementsByClassName('needs-validation-exim');
+        let validation = Array.prototype.filter.call(forms, function (form) {
+            form.classList.add('was-validated');
+        });
     }
-});
+};
 
 GI("divLayout").addEventListener("click", (e)=>{
     if(e.target.id == "divLayout"){

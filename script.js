@@ -1,6 +1,8 @@
 function pilihElement(elm) {
+    let attr = getElementAttributes(elm);
+    console.log(attr);
     switch (elm) {
-        case 'H': {
+        case 'H1': {
             rendElm({
                 to: "#modalBody", elm: [
                     {elm: "div", cls: "form-group", elms: [
@@ -640,7 +642,7 @@ function __handleAddElm(e) {
     e.stopPropagation();
     if (e.target.checkValidity()) {
         let ELM = {};
-        if (__ElmType == "H") {
+        if (__ElmType == "H1") {
             let form = GI("modalBody");
             let input = form.getElementsByClassName("cls-input");
             for (let i = 0; i < input.length; i++) ELM[input[i].name] = input[i].value;
@@ -846,7 +848,7 @@ function main() {
         to: "#tbodyElement", elm: [
             {elm: "table", cls: "table table-striped table-hovered", elms: [
                 {elm: "tbody", elms: [
-                    {elm: "tr", onclick: "pilihElement('H')", elms: [
+                    {elm: "tr", onclick: "pilihElement('H1')", elms: [
                         { elm: "td", text: "Header" }
                     ]},
                     {elm: "tr", onclick: "pilihElement('input')", elms: [

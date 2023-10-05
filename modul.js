@@ -85,7 +85,7 @@ function htmlToJSON(element) {
         for (const child of element.children) {
             json.elms.push(htmlToJSON(child));
         }
-    }else{
+    } else {
         json.text = element.innerText.trim();
     }
 
@@ -126,3 +126,12 @@ function getAllHtmlAttributes() {
 function GI(id) {
     return document.getElementById(id);
 }
+
+function getElementAttributes(elm) {
+    const element = document.createElement(elm);
+    const attributes = Array.from(element.attributes).map((attr) => attr.name);
+    return element.attributes;
+}
+
+// Menggunakan fungsi untuk mendapatkan data
+const elementAttributesJSON = getElementAttributes();

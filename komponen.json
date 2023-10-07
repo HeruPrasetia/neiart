@@ -1,0 +1,1389 @@
+{
+    "component": [
+        {"name": "Card", "note": "", "elm": [
+            {"elm": "div", "class": "card", "style": "width: 18rem;", "elms": [
+                {"elm": "img", "src": "https://i0.wp.com/dianisa.com/wp-content/uploads/2022/11/1-Gambar-pemandangan-alam-gunung.jpg?ssl=1", "class": "card-img-top", "alt": "Gambar Dari Card", "text": ""},
+                {"elm": "div", "class": "card-body", "elms": [
+                    {"elm": "h5", "class": "card-title", "text": "Card title"},
+                    {"elm": "p", "class": "card-text", "text": "Ini adlahah ketarangan dari card"},
+                    {"elm": "a", "href": "#", "class": "btn btn-primary","text": "Detail"}
+                ]}
+            ]},
+            {"elm": "div", "class": "card", "style": "width: 18rem;", "elms": [
+                {"elm": "img", "src": "https://i0.wp.com/dianisa.com/wp-content/uploads/2022/11/1-Gambar-pemandangan-alam-gunung.jpg?ssl=1", "class": "card-img-top", "alt": "Logo", "text": ""},
+                {"elm": "div", "class": "card-body", "elms": [
+                    {"elm": "h5", "class": "card-title", "text": "Card title"},
+                    {"elm": "p", "class": "card-text", "text": "Some quick example text to build on the card title and make up the bulk of the card's content."}
+                ]},
+                {"elm": "ul", "class": "list-group list-group-flush", "elms": [
+                    {"elm": "li", "class": "list-group-item", "text": "An item"},
+                    {"elm": "li", "class": "list-group-item", "text": "A second item"},
+                    {"elm": "li", "class": "list-group-item", "text": "A third item"}
+                ]},
+                {"elm": "div", "class": "card-body", "elms": [
+                    {"elm": "a", "href": "#", "class": "card-link", "text": "Card link"},
+                    {"elm": "a", "href": "#", "class": "card-link", "text": "Another link"}
+                ]}
+            ]},
+            {"elm": "div", "class": "card text-center", "elms": [
+                { "elm": "div", "class": "card-header", "text": "Featured"},
+                { "elm": "div", "class": "card-body", "elms": [
+                    {"elm": "h5", "class": "card-title", "text": "Special title treatment"},
+                    {"elm": "p", "class": "card-text", "text": "With supporting text below as a natural lead-in to additional content."},
+                    {"elm": "a", "href": "#", "class": "btn btn-primary","text": "Go somewhere"}
+                ]},
+                { "elm": "div", "class": "card-footer text-muted", "text": "2 days ago"}
+            ]},
+            {"elm":"div", "elms":[
+                { "elm": "div", "class": "row", "elms": [
+                    { "elm": "div", "class": "col-sm-6", "elms": [
+                        { "elm": "div", "class": "card", "elms": [
+                            { "elm": "div", "class": "card-body", "elms": [
+                                    { "elm": "h5", "class": "card-title", "text": "Special title treatment"},
+                                    { "elm": "p", "class": "card-text", "text": "With supporting text below as a natural lead-in to additional content."},
+                                    { "elm": "a", "href": "#", "class": "btn btn-primary", "text": "Go somewhere"}
+                            ]}
+                        ]}
+                    ]},
+                    {"elm": "div", "class": "col-sm-6", "elms": [
+                        { "elm": "div", "class": "card", "elms": [
+                            { "elm": "div", "class": "card-body", "elms": [
+                                { "elm": "h5", "class": "card-title", "text": "Special title treatment"},
+                                { "elm": "p", "class": "card-text", "text": "With supporting text below as a natural lead-in to additional content."},
+                                { "elm": "a", "href": "#", "class": "btn btn-primary", "text": "Go somewhere"}
+                            ]}
+                        ]}
+                    ]}
+                ]}
+            ]},
+            {"elm":"div", "elms":[
+                {"elm": "div", "class": "card w-75", "elms": [
+                    {"elm": "div", "class": "card-body", "elms": [
+                        {"elm": "h5", "class": "card-title", "text": "Card title"},
+                        {"elm": "p", "class": "card-text", "text": "With supporting text below as a natural lead-in to additional content."},
+                        {"elm": "a", "href": "#", "class": "btn btn-primary", "text": "Button"}
+                    ]}
+                ]},
+                {"elm": "div", "class": "card w-50", "elms": [
+                    {"elm": "div", "class": "card-body", "elms": [
+                        { "elm": "h5", "class": "card-title", "text": "Card title"},
+                        { "elm": "p", "class": "card-text", "text": "With supporting text below as a natural lead-in to additional content."},
+                        { "elm": "a", "href": "#", "class": "btn btn-primary","text": "Button"}
+                    ]}
+                ]}
+            ]},
+            {
+                "elm": "div",
+                "class": "card text-center",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "card-header",
+                        "elms": [
+                            {
+                                "elm": "ul",
+                                "class": "nav nav-tabs card-header-tabs",
+                                "elms": [
+                                    {
+                                        "elm": "li",
+                                        "class": "nav-item",
+                                        "elms": [
+                                            {
+                                                "elm": "a",
+                                                "class": "nav-link active",
+                                                "aria-current": "true",
+                                                "href": "#",
+                                                "text": "Active"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "elm": "li",
+                                        "class": "nav-item",
+                                        "elms": [
+                                            {
+                                                "elm": "a",
+                                                "class": "nav-link",
+                                                "href": "#",
+                                                "text": "Link"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "elm": "li",
+                                        "class": "nav-item",
+                                        "elms": [
+                                            {
+                                                "elm": "a",
+                                                "class": "nav-link disabled",
+                                                "text": "Disabled"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "card-body",
+                        "elms": [
+                            {
+                                "elm": "h5",
+                                "class": "card-title",
+                                "text": "Special title treatment"
+                            },
+                            {
+                                "elm": "p",
+                                "class": "card-text",
+                                "text": "With supporting text below as a natural lead-in to additional content."
+                            },
+                            {
+                                "elm": "a",
+                                "href": "#",
+                                "class": "btn btn-primary",
+                                "text": "Go somewhere"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "elm": "div",
+                "class": "card text-center",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "card-header",
+                        "elms": [
+                            {
+                                "elm": "ul",
+                                "class": "nav nav-pills card-header-pills",
+                                "elms": [
+                                    {
+                                        "elm": "li",
+                                        "class": "nav-item",
+                                        "elms": [
+                                            {
+                                                "elm": "a",
+                                                "class": "nav-link active",
+                                                "href": "#",
+                                                "text": "Active"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "elm": "li",
+                                        "class": "nav-item",
+                                        "elms": [
+                                            {
+                                                "elm": "a",
+                                                "class": "nav-link",
+                                                "href": "#",
+                                                "text": "Link"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "elm": "li",
+                                        "class": "nav-item",
+                                        "elms": [
+                                            {
+                                                "elm": "a",
+                                                "class": "nav-link disabled",
+                                                "text": "Disabled"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "card-body",
+                        "elms": [
+                            {
+                                "elm": "h5",
+                                "class": "card-title",
+                                "text": "Special title treatment"
+                            },
+                            {
+                                "elm": "p",
+                                "class": "card-text",
+                                "text": "With supporting text below as a natural lead-in to additional content."
+                            },
+                            {
+                                "elm": "a",
+                                "href": "#",
+                                "class": "btn btn-primary",
+                                "text": "Go somewhere"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "elm": "div",
+                "class": "card mb-3",
+                "style": "max-width: 540px;",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "row g-0",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "col-md-4",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "img-fluid rounded-start",
+                                        "alt": "...",
+                                        "text": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "elm": "div",
+                                "class": "col-md-8",
+                                "elms": [
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "elms": [
+                                                    {
+                                                        "elm": "small",
+                                                        "class": "text-muted",
+                                                        "text": "Last updated 3 mins ago"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "elm": "div",
+                "class": "row row-cols-1 row-cols-md-2 g-4",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "elm": "div",
+                "class": "row row-cols-1 row-cols-md-3 g-4",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "elm": "div",
+                "class": "row row-cols-1 row-cols-md-3 g-4",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card h-100",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card h-100",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a short card."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card h-100",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "elm": "div",
+                        "class": "col",
+                        "elms": [
+                            {
+                                "elm": "div",
+                                "class": "card h-100",
+                                "elms": [
+                                    {
+                                        "elm": "img",
+                                        "src": "...",
+                                        "class": "card-img-top",
+                                        "alt": "...",
+                                        "text": ""
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "card-body",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "card-title",
+                                                "text": "Card title"
+                                            },
+                                            {
+                                                "elm": "p",
+                                                "class": "card-text",
+                                                "text": "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]},
+        {"name":"Navbar", "note":"", "elm":[
+            {
+                "elm": "nav",
+                "class": "navbar navbar-expand-lg bg-light",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "container-fluid",
+                        "elms": [
+                            {
+                                "elm": "a",
+                                "class": "navbar-brand",
+                                "href": "#",
+                                "text": "Navbar"
+                            },
+                            {
+                                "elm": "button",
+                                "class": "navbar-toggler",
+                                "type": "button",
+                                "data-bs-toggle": "collapse",
+                                "data-bs-target": "#navbarSupportedContent",
+                                "aria-controls": "navbarSupportedContent",
+                                "aria-expanded": "false",
+                                "aria-label": "Toggle navigation",
+                                "elms": [
+                                    {
+                                        "elm": "span",
+                                        "class": "navbar-toggler-icon",
+                                        "text": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "elm": "div",
+                                "class": "collapse navbar-collapse",
+                                "id": "navbarSupportedContent",
+                                "elms": [
+                                    {
+                                        "elm": "ul",
+                                        "class": "navbar-nav me-auto mb-2 mb-lg-0",
+                                        "elms": [
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link active",
+                                                        "aria-current": "page",
+                                                        "href": "#",
+                                                        "text": "Home"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link",
+                                                        "href": "#",
+                                                        "text": "Link"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item dropdown",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link dropdown-toggle",
+                                                        "href": "#",
+                                                        "role": "button",
+                                                        "data-bs-toggle": "dropdown",
+                                                        "aria-expanded": "false",
+                                                        "text": "Dropdown"
+                                                    },
+                                                    {
+                                                        "elm": "ul",
+                                                        "class": "dropdown-menu",
+                                                        "elms": [
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Action"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Another action"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "hr",
+                                                                        "class": "dropdown-divider",
+                                                                        "text": ""
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Something else here"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link disabled",
+                                                        "text": "Disabled"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "elm": "form",
+                                        "class": "d-flex",
+                                        "role": "search",
+                                        "elms": [
+                                            {
+                                                "elm": "input",
+                                                "class": "form-control me-2",
+                                                "type": "search",
+                                                "placeholder": "Search",
+                                                "aria-label": "Search",
+                                                "text": ""
+                                            },
+                                            {
+                                                "elm": "button",
+                                                "class": "btn btn-outline-success",
+                                                "type": "submit",
+                                                "text": "Search"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "elm": "nav",
+                "class": "navbar navbar-expand-lg bg-light",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "container-fluid",
+                        "elms": [
+                            {
+                                "elm": "a",
+                                "class": "navbar-brand",
+                                "href": "#",
+                                "text": "Navbar"
+                            },
+                            {
+                                "elm": "button",
+                                "class": "navbar-toggler",
+                                "type": "button",
+                                "data-bs-toggle": "collapse",
+                                "data-bs-target": "#navbarNavDropdown",
+                                "aria-controls": "navbarNavDropdown",
+                                "aria-expanded": "false",
+                                "aria-label": "Toggle navigation",
+                                "elms": [
+                                    {
+                                        "elm": "span",
+                                        "class": "navbar-toggler-icon",
+                                        "text": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "elm": "div",
+                                "class": "collapse navbar-collapse",
+                                "id": "navbarNavDropdown",
+                                "elms": [
+                                    {
+                                        "elm": "ul",
+                                        "class": "navbar-nav",
+                                        "elms": [
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link active",
+                                                        "aria-current": "page",
+                                                        "href": "#",
+                                                        "text": "Home"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link",
+                                                        "href": "#",
+                                                        "text": "Features"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link",
+                                                        "href": "#",
+                                                        "text": "Pricing"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item dropdown",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link dropdown-toggle",
+                                                        "href": "#",
+                                                        "role": "button",
+                                                        "data-bs-toggle": "dropdown",
+                                                        "aria-expanded": "false",
+                                                        "text": "Dropdown link"
+                                                    },
+                                                    {
+                                                        "elm": "ul",
+                                                        "class": "dropdown-menu",
+                                                        "elms": [
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Action"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Another action"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Something else here"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "elm": "nav",
+                "class": "navbar navbar-expand-lg bg-light",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "container-fluid",
+                        "elms": [
+                            {
+                                "elm": "a",
+                                "class": "navbar-brand",
+                                "href": "#",
+                                "text": "Navbar scroll"
+                            },
+                            {
+                                "elm": "button",
+                                "class": "navbar-toggler",
+                                "type": "button",
+                                "data-bs-toggle": "collapse",
+                                "data-bs-target": "#navbarScroll",
+                                "aria-controls": "navbarScroll",
+                                "aria-expanded": "false",
+                                "aria-label": "Toggle navigation",
+                                "elms": [
+                                    {
+                                        "elm": "span",
+                                        "class": "navbar-toggler-icon",
+                                        "text": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "elm": "div",
+                                "class": "collapse navbar-collapse",
+                                "id": "navbarScroll",
+                                "elms": [
+                                    {
+                                        "elm": "ul",
+                                        "class": "navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll",
+                                        "style": "--bs-scroll-height: 100px;",
+                                        "elms": [
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link active",
+                                                        "aria-current": "page",
+                                                        "href": "#",
+                                                        "text": "Home"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link",
+                                                        "href": "#",
+                                                        "text": "Link"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item dropdown",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link dropdown-toggle",
+                                                        "href": "#",
+                                                        "role": "button",
+                                                        "data-bs-toggle": "dropdown",
+                                                        "aria-expanded": "false",
+                                                        "text": "Link"
+                                                    },
+                                                    {
+                                                        "elm": "ul",
+                                                        "class": "dropdown-menu",
+                                                        "elms": [
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Action"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Another action"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "hr",
+                                                                        "class": "dropdown-divider",
+                                                                        "text": ""
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "elm": "li",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "a",
+                                                                        "class": "dropdown-item",
+                                                                        "href": "#",
+                                                                        "text": "Something else here"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "li",
+                                                "class": "nav-item",
+                                                "elms": [
+                                                    {
+                                                        "elm": "a",
+                                                        "class": "nav-link disabled",
+                                                        "text": "Link"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "elm": "form",
+                                        "class": "d-flex",
+                                        "role": "search",
+                                        "elms": [
+                                            {
+                                                "elm": "input",
+                                                "class": "form-control me-2",
+                                                "type": "search",
+                                                "placeholder": "Search",
+                                                "aria-label": "Search",
+                                                "text": ""
+                                            },
+                                            {
+                                                "elm": "button",
+                                                "class": "btn btn-outline-success",
+                                                "type": "submit",
+                                                "text": "Search"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "elm": "nav",
+                "class": "navbar bg-light fixed-top",
+                "elms": [
+                    {
+                        "elm": "div",
+                        "class": "container-fluid",
+                        "elms": [
+                            {
+                                "elm": "a",
+                                "class": "navbar-brand",
+                                "href": "#",
+                                "text": "Offcanvas navbar"
+                            },
+                            {
+                                "elm": "button",
+                                "class": "navbar-toggler",
+                                "type": "button",
+                                "data-bs-toggle": "offcanvas",
+                                "data-bs-target": "#offcanvasNavbar",
+                                "aria-controls": "offcanvasNavbar",
+                                "elms": [
+                                    {
+                                        "elm": "span",
+                                        "class": "navbar-toggler-icon",
+                                        "text": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "elm": "div",
+                                "class": "offcanvas offcanvas-end",
+                                "tabindex": "-1",
+                                "id": "offcanvasNavbar",
+                                "aria-labelledby": "offcanvasNavbarLabel",
+                                "elms": [
+                                    {
+                                        "elm": "div",
+                                        "class": "offcanvas-header",
+                                        "elms": [
+                                            {
+                                                "elm": "h5",
+                                                "class": "offcanvas-title",
+                                                "id": "offcanvasNavbarLabel",
+                                                "text": "Offcanvas"
+                                            },
+                                            {
+                                                "elm": "button",
+                                                "type": "button",
+                                                "class": "btn-close",
+                                                "data-bs-dismiss": "offcanvas",
+                                                "aria-label": "Close",
+                                                "text": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "elm": "div",
+                                        "class": "offcanvas-body",
+                                        "elms": [
+                                            {
+                                                "elm": "ul",
+                                                "class": "navbar-nav justify-content-end flex-grow-1 pe-3",
+                                                "elms": [
+                                                    {
+                                                        "elm": "li",
+                                                        "class": "nav-item",
+                                                        "elms": [
+                                                            {
+                                                                "elm": "a",
+                                                                "class": "nav-link active",
+                                                                "aria-current": "page",
+                                                                "href": "#",
+                                                                "text": "Home"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "elm": "li",
+                                                        "class": "nav-item",
+                                                        "elms": [
+                                                            {
+                                                                "elm": "a",
+                                                                "class": "nav-link",
+                                                                "href": "#",
+                                                                "text": "Link"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "elm": "li",
+                                                        "class": "nav-item dropdown",
+                                                        "elms": [
+                                                            {
+                                                                "elm": "a",
+                                                                "class": "nav-link dropdown-toggle",
+                                                                "href": "#",
+                                                                "role": "button",
+                                                                "data-bs-toggle": "dropdown",
+                                                                "aria-expanded": "false",
+                                                                "text": "Dropdown"
+                                                            },
+                                                            {
+                                                                "elm": "ul",
+                                                                "class": "dropdown-menu",
+                                                                "elms": [
+                                                                    {
+                                                                        "elm": "li",
+                                                                        "elms": [
+                                                                            {
+                                                                                "elm": "a",
+                                                                                "class": "dropdown-item",
+                                                                                "href": "#",
+                                                                                "text": "Action"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "elm": "li",
+                                                                        "elms": [
+                                                                            {
+                                                                                "elm": "a",
+                                                                                "class": "dropdown-item",
+                                                                                "href": "#",
+                                                                                "text": "Another action"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "elm": "li",
+                                                                        "elms": [
+                                                                            {
+                                                                                "elm": "hr",
+                                                                                "class": "dropdown-divider",
+                                                                                "text": ""
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "elm": "li",
+                                                                        "elms": [
+                                                                            {
+                                                                                "elm": "a",
+                                                                                "class": "dropdown-item",
+                                                                                "href": "#",
+                                                                                "text": "Something else here"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "elm": "form",
+                                                "class": "d-flex mt-3",
+                                                "role": "search",
+                                                "elms": [
+                                                    {
+                                                        "elm": "input",
+                                                        "class": "form-control me-2",
+                                                        "type": "search",
+                                                        "placeholder": "Search",
+                                                        "aria-label": "Search",
+                                                        "text": ""
+                                                    },
+                                                    {
+                                                        "elm": "button",
+                                                        "class": "btn btn-outline-success",
+                                                        "type": "submit",
+                                                        "text": "Search"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]}
+    ]
+}

@@ -1,6 +1,8 @@
+let __ElmType = "H",
+    __Elms = localStorage.getItem("Elms") ? JSON.parse(localStorage.getItem("Elms")) : [],
+    arrOption = [], arrTable = [], __elmIdx = [];
+
 function pilihElement(elm) {
-    let attr = getElementAttributes(elm);
-    console.log(attr);
     switch (elm) {
         case 'H1': {
             rendElm({
@@ -98,7 +100,7 @@ function pilihElement(elm) {
                 let grid = [];
                 for (let i = 0; i < this.value; i++) grid.push({
                     elm: "div", cls: "col mb-2 shadow", elms: [
-                        { elm: "div", text: `Grid ${i}` }
+                        {elm: "div", text: `Grid ${i}`}
                     ]
                 })
                 rendElm({
@@ -839,7 +841,7 @@ function elmToElm(elm){
 
         eval(index);
     }else{
-        __Elms.push(elm);
+        __Elms.push(elm);;
     }
 }
 
@@ -874,10 +876,65 @@ function main() {
         ]
     });
 
+    fetch('komponen.json')
+        .then(response => response.json())
+        .then(data => {
+            let template = [];
+            let i = 0;
+            for(let dd of data.component){
+                template.push({elm:"tr", elms:[
+                    {elm:"td", text:dd.name, onclick:`modalPilihTemplate(${i})`}
+                ]});
+                i++;
+            }
+
+            rendElm({to:"#tbodyTemplateElement", elm:template});
+        })
+        .catch(error => {
+            console.error('Terjadi kesalahan:', error);
+        });
+
     handleMain();
 }
 
 main();
+
+function modalPilihTemplate(idx){
+    fetch('komponen.json')
+        .then(response => response.json())
+        .then(data => {
+            let template = []
+            let i = 0;
+            for(let dd of data.component[idx].elm){
+                template.push({elm:"div", cls:"card shadow mb-2", onclick:`__handlePilihTemplate(${idx}, ${i})`, elms:[
+                    {elm:"div", cls:"card-header", text:""},
+                    {elm:"div", cls:"card-body", elms:[dd]}
+                ]});
+                i++;
+            }
+            rendElm({to:"#divModalBodyTemplate", elm:template});
+            const myModal = new bootstrap.Modal(GI('modalTemplate'), {});
+            myModal.show();
+        })
+        .catch(error => {
+            console.error('Terjadi kesalahan:', error);
+        });
+}
+
+function __handlePilihTemplate(i, ii){
+    fetch('komponen.json')
+        .then(response => response.json())
+        .then(data => {
+            let template = data.component[i].elm[ii];
+            elmToElm(template);
+            localStorage.setItem("Elms", JSON.stringify(__Elms));
+            handleMain();
+            GI("btnTutupModalTemplate").click();
+        })
+        .catch(error => {
+            console.error('Terjadi kesalahan:', error);
+        });
+}
 
 function __handleExIm(e){
     e.stopPropagation();
@@ -886,23 +943,25 @@ function __handleExIm(e){
         let opsi = GI('edtOpsi').value;
         let edt = GI("edtEditor");
         if (opsi == "Import HTML") {
-            const htmlString = "<main>" + edt.value + "</main>";
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(htmlString, 'text/html');
-            const rootElement = doc.querySelector('main');
+            let htmlString = "<main>" + edt.value + "</main>";
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(htmlString, 'text/html');
+            let rootElement = doc.querySelector('main');
 
-            const jsonData = htmlToJSON(rootElement);
+            let jsonData = htmlToJSON(rootElement);
             __Elms.push(jsonData);
+            localStorage.setItem("Elms", JSON.stringify(__Elms));
             handleMain();
+            GI("btnTutupModalExIm").click();
         } else if (opsi == 'Import JSON') {
             let elm = JSON.parse(edt.value);
             rendElm({ to: "#main", elm: elm });
+            GI("btnTutupModalExIm").click();
         } else if (opsi == "Export JSON") {
-            edt.valye = JSON.stringify(__Elms);
+            edt.value = JSON.stringify(__Elms);        
         } else if(opsi == "Export HTML"){
             edt.value = document.getElementById('main').innerHTML;
         }
-        GI("btnTutupModalExIm").click();
     }else{
         let forms = document.getElementsByClassName('needs-validation-exim');
         let validation = Array.prototype.filter.call(forms, function (form) {
@@ -918,13 +977,6 @@ GI("divLayout").addEventListener("click", (e)=>{
         for (let i = 0; i < clsActive.length; i++) clsActive[i].classList.remove("element-active");
         GI("divEdit").innerHTML = "";
     }
-});
-
-GI("btnReset").addEventListener("click", ()=>{
-    __Elms = [];
-    __elmIdx = [];
-    localStorage.clear();
-    handleMain();
 });
 
 GI("btnAddAtribut").addEventListener("click", ()=>{

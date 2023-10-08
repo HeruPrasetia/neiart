@@ -946,6 +946,7 @@ async function __handlePilihTemplate(i, ii){
     elmToElm(template);
     localStorage.setItem("Elms", JSON.stringify(__Elms));
     handleMain();
+    GI("btnTutupModalTemplate").click();
 }
 
 function __handleExIm(e){
@@ -953,9 +954,9 @@ function __handleExIm(e){
     e.preventDefault();
     if(e.target.checkValidity()){
         let opsi = GI('edtOpsi').value;
-        let edt = GI("edtEditor");
+        let edt = myCodeMirror;
         if (opsi == "Import HTML") {
-            let htmlString = "<main>" + edt.value + "</main>";
+            let htmlString = "<main>" + edt.getValue() + "</main>";
             let parser = new DOMParser();
             let doc = parser.parseFromString(htmlString, 'text/html');
             let rootElement = doc.querySelector('main');
@@ -966,13 +967,15 @@ function __handleExIm(e){
             handleMain();
             GI("btnTutupModalExIm").click();
         } else if (opsi == 'Import JSON') {
-            let elm = JSON.parse(edt.value);
+            let elm = JSON.parse(edt.getValue());
             rendElm({ to: "#main", elm: elm });
             GI("btnTutupModalExIm").click();
         } else if (opsi == "Export JSON") {
-            edt.value = JSON.stringify(__Elms);        
+            edt.setValue('');
+            edt.replaceRange(JSON.stringify(__Elms), { line: 0, ch: 0 });
         } else if(opsi == "Export HTML"){
-            edt.value = document.getElementById('main').innerHTML;
+            edt.setValue('');
+            edt.replaceRange(document.getElementById('main').innerHTML, { line: 0, ch: 0 });
         }
     }else{
         let forms = document.getElementsByClassName('needs-validation-exim');
@@ -1016,7 +1019,21 @@ function __handleAddAttr(div){
     ]})
 }
 
+var currentCard = null;
+
+GI("main").addEventListener("contextmenu", (e)=>{
+    showCard(e);
+});
+
 GI("main").addEventListener("click", (e)=>{
+    if (e.target.id === 'cardEdit' || e.target.closest('#cardEdit')) {
+        return;
+    }
+
+    if (currentCard) {
+        currentCard.style.display = 'none';
+        currentCard.remove();
+    }
     if(e.target.id != "main"){
         let elm = e.target;
         let count = 0;
@@ -1046,7 +1063,7 @@ GI("main").addEventListener("click", (e)=>{
                     elmToRend.push({
                         elm: "div", cls: "form-group", elms: [
                             {elm: "label", text: key.toUpperCase() },
-                            {elm: "input", type: "text", onfocus:"this.select()", cls: "form-control", name: key, value: tempELm[key] }
+                            {elm: "input", type: "text", onfocus:"this.select()", cls: "form-control form-control-sm form-edit", name: key, value: tempELm[key] }
                         ]
                     });
                 }
@@ -1064,7 +1081,78 @@ GI("main").addEventListener("click", (e)=>{
             ]}
         ] });
         rendElm({to: "#divEdit", elm: [
-            { elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
+            {elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
         ]});
     }
 });
+
+function showCard(e) {
+    if(e.target.id != "main"){
+        if (currentCard) {
+            currentCard.style.display = 'none';
+            currentCard.remove();
+        }
+    
+        var card = document.createElement('div');
+        card.className = 'card shadow';
+        card.id = "cardEdit";
+        card.style.width = "300px";
+        card.style.left = (e.clientX - 200) + 'px';
+        card.style.top = (e.clientY - 10) + 'px';    
+        document.getElementById('main').appendChild(card);
+        card.style.display = 'block';
+        currentCard = card;
+        e.preventDefault();
+        let elm = e.target;
+        let count = 0;
+        let currentElement = elm;
+        let ii = [];
+
+        while (currentElement.parentNode) {
+            if (currentElement.id === "main") break;
+            let ddd = currentElement;
+            currentElement = currentElement.parentNode;
+            let child = currentElement.children;
+            let anakArray = Array.from(child);
+            let indeks = anakArray.indexOf(ddd);
+            count++;
+            ii.push(indeks);
+        }
+        
+        __elmIdx = ii.reverse();
+        let tempELm = __Elms;
+        for (let i = 0; i < __elmIdx.length; i++) tempELm = tempELm.elms !== undefined ? tempELm.elms[__elmIdx[i]] : tempELm[__elmIdx[i]];
+        let elmToRend = [];
+        for (var key in tempELm) {
+            if (tempELm.hasOwnProperty(key)) {
+                if (key == "elms") {
+                    rendElm({ to: "#divEdit", elm: tempELm.elms });
+                } else {
+                    elmToRend.push({
+                        elm: "div", cls: "form-group", elms: [
+                            {elm: "label", text: key.toUpperCase() },
+                            {elm: "input", type: "text", onfocus:"this.select()", cls: "form-control form-control-sm form-edit", name: key, value: tempELm[key] }
+                        ]
+                    });
+                }
+            }
+        }
+
+        elmToRend.push({ elm: "p" });
+        elmToRend.push({ elm:"div", cls:"d-flex", elms:[
+            {elm:"div", id:"divAddAttrEdit"},
+            {elm:"p"},
+            {elm:"div", cls:"d-flex justofy-content-center align-items-center gap-1", elms:[
+                {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
+                {elm: "button", type: "button", onclick:"__handleAddAttr('divAddAttrEdit')", cls: "btn btn-warning", text: "+ Atribut"},
+                {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"},
+            ]}
+        ] });
+        rendElm({to: "#cardEdit", elm: [
+            {elm:"div", cls:"card-header", text:"Edit Element"},
+            {elm:"div", cls:"card-body", elms:[
+                {elm: "form", onsubmit: "__handleEditElm(event)", id:"formEditElm", novalidate: true, elms: elmToRend }
+            ]}
+        ]});
+    }
+}

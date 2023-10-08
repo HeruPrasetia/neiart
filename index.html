@@ -41,7 +41,6 @@
                 <div class="card shadow" style="padding:10px">
                     <div class="card-deaser">Element Editor</div>
                     <div class="card-body">
-                        <button class="btn btn-sm btn-danger w-50" type="button" id="btnLoad">load</button>
                         <div class="d-flex justify-content-center align-items-center gap-1">
                             <button class="btn btn-sm btn-primary w-50" type="button" id="btnExIm"
                                 data-bs-toggle="modal" data-bs-target="#modalExportImport">Export / Import</button>
@@ -174,13 +173,13 @@
     </div>
     <script>
         var myTextarea = document.getElementById("edtEditor");
-        // var myCodeMirror = CodeMirror.fromTextArea(myTextarea, {
-        //     mode: "css", // Mode syntax highlighting, ganti sesuai bahasa yang Anda inginkan
-        //     theme: "cobalt", // Ganti tema sesuai keinginan Anda
-        //     lineNumbers: true, // Menampilkan baris nomor
-        //     extraKeys: {"Ctrl-Space": "autocomplete"}
-        //     // Konfigurasi lainnya sesuai kebutuhan Anda
-        // });
+        var myCodeMirror = CodeMirror.fromTextArea(myTextarea, {
+            mode: "css", // Mode syntax highlighting, ganti sesuai bahasa yang Anda inginkan
+            theme: "cobalt", // Ganti tema sesuai keinginan Anda
+            lineNumbers: true, // Menampilkan baris nomor
+            extraKeys: {"Ctrl-Space": "autocomplete"}
+            // Konfigurasi lainnya sesuai kebutuhan Anda
+        });
         document.getElementById("btnReset").addEventListener("click", function () {
             __Elms = [];
             __elmIdx = [];
@@ -190,11 +189,6 @@
     </script>
     <script src="modul.js"></script>
     <script src="script.js"></script>
-    <script>
-        GI("btnLoad").addEventListener("click", async function(){
-            load("editor.html");
-        })
-    </script>
 </body>
 
 </html>

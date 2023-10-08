@@ -1,34 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Editor</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
-    <link rel="stylesheet" href="https://codemirror.net/5/theme/cobalt.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/javascript/javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/css/css.min.js"></script>
-    <script src="https://codemirror.net/5/mode/css/css.js"></script>
-
+    <style>
+        /* Gaya kartu yang akan muncul */
+        .card {
+            width: 200px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            position: absolute;
+            display: none;
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <h5>Malam Bantua Aku</h5>
-    <textarea id="myTextarea"></textarea>
-    <script>
-        var myTextarea = document.getElementById("myTextarea");
-        var myCodeMirror = CodeMirror.fromTextArea(myTextarea, {
-            mode: "css", // Mode syntax highlighting, ganti sesuai bahasa yang Anda inginkan
-            theme: "cobalt", // Ganti tema sesuai keinginan Anda
-            lineNumbers: true, // Menampilkan baris nomor
-            extraKeys: {"Ctrl-Space": "autocomplete"}
-            // Konfigurasi lainnya sesuai kebutuhan Anda
-        });
 
+    <div id="container" style="position: relative; width: 500px; height: 300px; border: 1px solid #000;"></div>
+
+    <script>
+        // Fungsi untuk menampilkan kartu pada posisi klik
+        var currentCard = null;
+        function showCard(event) {
+            // Cek apakah ada kartu yang sedang ditampilkan
+            if (currentCard) {
+                currentCard.style.display = 'none';
+                currentCard.remove(); // Hapus elemen kartu dari DOM
+            }
+
+            // Buat elemen kartu
+            var card = document.createElement('div');
+            card.className = 'card';
+            card.innerText = 'Ini adalah kartu muncul di sini';
+
+            // Tetapkan posisi kartu sesuai dengan lokasi klik
+            card.style.left = (event.clientX - 50) + 'px'; // Sesuaikan dengan lebar kartu
+            card.style.top = (event.clientY - 50) + 'px'; // Sesuaikan dengan tinggi kartu
+
+            // Tambahkan kartu ke elemen container
+            document.getElementById('container').appendChild(card);
+
+            // Tampilkan kartu
+            card.style.display = 'block';
+
+            // Sembunyikan kartu setelah beberapa detik (opsional)
+            setTimeout(function () {
+                card.style.display = 'none';
+                card.remove(); // Hapus elemen kartu dari DOM
+            }, 2000); // Kartu akan hilang setelah 2 detik
+
+            // Atur kartu saat ini ke elemen kartu yang baru
+            currentCard = card;
+        }
+
+        // Tambahkan event listener untuk mengaktifkan fungsi saat mengklik elemen container
+        document.getElementById('container').addEventListener('click', showCard);
     </script>
+
 </body>
 
 </html>

@@ -15,6 +15,9 @@ function rendElm(opt) {
                     for (let attr in elm.attr) cElm.setAttribute(attr, elm.attr[attr]);
                 } else if (key == "style") {
                     cElm.setAttribute("style", elm.style);
+                } else if (key == "script") {
+                    if (elm.src != "" || elm.src !== undefined) cElm.setAttribute("src", elm.src);
+                    if (elm.text != "" || elm.text !== undefined) cElm.setAttribute("src", elm.src);
                 } else if (key == "elms") {
                     for (let Elm of elm.elms) {
                         let ss = mm(Elm);
@@ -127,6 +130,99 @@ function getElementAttributes(elm) {
     const element = document.createElement(elm);
     const attributes = Array.from(element.attributes).map((attr) => attr.name);
     return element.attributes;
+}
+
+function load(url, id = "main") {
+    fetch(encodeURI(url)).then(response => response.text()).then(hasil => {
+        document.getElementById(id).innerHTML = hasil;
+        if (hasil.includes("<script>")) {
+            for (let i = 0; i < (hasil.match(/<script>/g) || []).length; i++) {
+                let start = hasil.indexOf("<script>", i) + 8;
+                let end = hasil.indexOf("</script>", i);
+                let script = hasil.substring(start, end);
+                let node = document.createElement("script");
+                let ss = document.createTextNode(script);
+                node.appendChild(ss);
+                document.getElementById(id).appendChild(node);
+            }
+        }
+    }).catch((error) => {
+        console.log("Error: " + error);
+    });
+}
+
+function api(url, data = []) {
+    if (data.length == 0) {
+        return new Promise((resolve, reject) => {
+            fetch(encodeURI(url))
+                .then(response => response.text())
+                .then(hasil => {
+                    if (location.hostname == "localhost") {
+                        if (isJson(hasil)) {
+                            console.log(JSON.parse(hasil));
+                        } else {
+                            console.log(hasil);
+                        }
+                    }
+                    try {
+                        if (isJson(hasil)) {
+                            resolve(JSON.parse(hasil));
+                        } else {
+                            resolve(hasil);
+                        }
+                    } catch (e) {
+                        resolve({ status: "gagal", pesan: "Terjadi kesalahan ketika memproses" });
+                    }
+                }).catch((error) => {
+                    reject({ status: "gagal", pesan: error });
+                });
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            fetch(encodeURI(url), {
+                method: 'POST',
+                body: jsonToForm(data),
+            })
+                .then(response => response.text())
+                .then(hasil => {
+                    if (location.hostname == "localhost") {
+                        if (isJson(hasil)) {
+                            console.log(JSON.parse(hasil));
+                        } else {
+                            console.log(hasil);
+                        }
+                    }
+                    try {
+                        if (isJson(hasil)) {
+                            resolve(JSON.parse(hasil));
+                        } else {
+                            resolve(hasil);
+                        }
+                    } catch (e) {
+                        resolve({ status: "gagal", pesan: "Terjadi kesalahan ketika memproses" });
+                    }
+                }).catch((error) => {
+                    reject({ status: "gagal", pesan: error });
+                });
+        });
+    }
+}
+
+function jsonToForm(data) {
+    const formData = new FormData();
+    for (let dt in data) {
+        formData.append(dt, data[dt]);
+    }
+    return formData;
+}
+
+function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
 
 // Menggunakan fungsi untuk mendapatkan data

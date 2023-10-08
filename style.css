@@ -27,7 +27,7 @@ col:hover {
 }
 
 .caret::before {
-    content: "\25BC";
+    content: "\25B6";
     /* Tanda panah ke kanan (Unicode) */
     margin-right: 6px;
 }
@@ -42,7 +42,7 @@ col:hover {
 }
 
 .caret-down::before {
-    content: "\25B6";
+    content: "\25BC";
 
 }
 

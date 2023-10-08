@@ -235,6 +235,42 @@ function pilihElement(elm) {
             });
         }break;
 
+        case 'script':{
+            rendElm({
+                to: "#modalBody", elm: [
+                    {"elm": "div", "cls": "form-group", "elms": [
+                        {"elm": "label", "text": "Jenis Source"},
+                        {"elm": "select", "type": "Select", "name": "TypeSrc", "id":"edtTypeSrc", "cls": "form-select", "elms": [
+                            {"elm": "option", "value": "External", "text": "External", "ID": "optExternal"},
+                            {"elm": "option", "value": "Internal", "text": "Internal", "ID": "optInternal"}
+                        ]}
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "ID" },
+                        { elm: "input", type: "text", id: "edtID", name:"id", cls: "form-control cls-input" },
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        { elm: "label", text: "src" },
+                        { elm: "input", type: "text", id: "edtSrc", name:"src", cls: "form-control cls-input", required:true}
+                    ]},
+                    {elm: "div", cls: "form-group", elms: [
+                        {elm: "label", text: "Script" },
+                        {elm: "textarea", id: "edtScript", name:"script", cls: "form-control cls-input", disabled:true },
+                    ]},
+                ]
+            });
+
+            GI("edtTypeSrc").addEventListener("change", function(){
+                if(this.value == "External"){
+                    GI("edtScript").disabled = true;
+                    GI("edtSrc").disabled = false;
+                }else{
+                    GI("edtScript").disabled = false;
+                    GI("edtSrc").disabled = true;
+                }
+            });
+        }break;
+
         case 'input': {
             rendElm({
                 to: "#modalBody", elm: [
@@ -547,11 +583,14 @@ function handleMain() {
     rendElm({ to: "#main", elm: __Elms });
     let LI = [], idx = 0;
     for (let li of __Elms) {
+        let cls = li.cls || "";
+        let id = li.id || "";
+        let text = li.text || "";
         LI.push({
             elm: "li", cls: "li", "data-id": idx, elms: li.elms !== undefined ? [
-                { elm: "span", cls: "caret element", "data-id": idx, text: `${li.elm.toUpperCase()} - .${li.cls} #${li.id}` },
-                { elm: "ul", cls: "nested active", elms: rendChild(li.elms, idx) }
-            ] : [{ elm: "h6", cls: "element", "data-id": idx, text: `${li.elm.toUpperCase()} - ${li.text}` }]
+                { elm: "span", cls: "caret element", "data-id": idx, text: `${li.elm.toUpperCase()} - .${cls} #${id}` },
+                { elm: "ul", cls: "nested", elms: rendChild(li.elms, idx) }
+            ] : [{ elm: "h6", cls: "element", "data-id": idx, text: `${li.elm.toUpperCase()} - ${text}` }]
         })
 
         idx++;
@@ -576,11 +615,14 @@ function handleMain() {
 function rendChild(elms) {
     let UL = [], i = 0
     for (let ul of elms) {
+        let cls = ul.cls || "";
+        let id = ul.id || "";
+        let text = ul.text || "";
         UL.push({
             elm: "li", cls: "li", "data-id": i, elms: ul.elms !== undefined ? [
-                {elm: "span", cls: "caret element", "data-id": i, text: `${ul.elm.toUpperCase()} - .${ul.cls} #${ul.id}` },
-                {elm: "ul", cls: "nested active", elms: rendChild(ul.elms) }
-            ] : [{ elm: "h6", cls: "element", "data-id": i, text: `${ul.elm.toUpperCase()} - ${ul.text}` }]
+                {elm: "span", cls: "caret element", "data-id": i, text: `${ul.elm.toUpperCase()} - .${cls} #${id}` },
+                {elm: "ul", cls: "nested", elms: rendChild(ul.elms) }
+            ] : [{ elm: "h6", cls: "element", "data-id": i, text: `${ul.elm.toUpperCase()} - ${text}` }]
         })
 
         i++;
@@ -630,7 +672,7 @@ function editElement(e) {
         {elm:"p"},
         {elm:"div", cls:"d-flex justofy-content-center align-items-center gap-1", elms:[
             {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
-            {elm: "button", type: "button", onclick:"__handleAddAttr('divAddAttrEdit')", cls: "btn btn-warning", text: "Tambah Atribut"},
+            {elm: "button", type: "button", onclick:"__handleAddAttr('divAddAttrEdit')", cls: "btn btn-warning", text: "+ Atribut"},
             {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"},
         ]}
     ] });
@@ -757,6 +799,13 @@ function __handleAddElm(e) {
             let valAttr = document.getElementsByClassName("val-attr");
             for (let i = 0; i < addAttr.length; i++) ELM[addAttr[i].value] = valAttr[i].value;
             elmToElm(ELM);
+        }else if(__ElmType == "script"){
+            let Type = GI("edtTypeSrc").value;
+            let ID = GI("edtID").value;
+            let Script = GI("edtScript").value;
+            let Src = GI("edtSrc").value;
+            if(Type == "External") __Elms.push({elm:"script", src:Src, id:ID});
+                __Elms.push({elm:"script", text:Script, id:ID});
         }
         localStorage.setItem("Elms", JSON.stringify(__Elms));
         handleMain();
@@ -845,95 +894,58 @@ function elmToElm(elm){
     }
 }
 
-function main() {
+async function main() {
+    let data = await api("komponen.json");
+    let template = [], element = [], i = 0;
+    for(let dd of data.element){
+        element.push({elm: "tr", onclick: `pilihElement('${dd.Value}')`, elms: [
+            { elm: "td", text: dd.Name }
+        ]});
+    }
+
     rendElm({
         to: "#tbodyElement", elm: [
             {elm: "table", cls: "table table-striped table-hovered", elms: [
-                {elm: "tbody", elms: [
-                    {elm: "tr", onclick: "pilihElement('H1')", elms: [
-                        { elm: "td", text: "Header" }
-                    ]},
-                    {elm: "tr", onclick: "pilihElement('input')", elms: [
-                        { elm: "td", text: "Input" }
-                    ]},
-                    {elm: "tr", onclick: "pilihElement('button')", elms: [
-                        { elm: "td", text: "Button" }
-                    ]},
-                    {elm: "tr", onclick: "pilihElement('table')", elms: [
-                        { elm: "td", text: "Table" }
-                    ]},
-                    {elm: "tr", onclick: "pilihElement('grid')", elms: [
-                        { elm: "td", text: "Grid" }
-                    ]},
-                    {elm: "tr", onclick: "pilihElement('div')", elms: [
-                        { elm: "td", text: "Div" }
-                    ]},
-                    {elm: "tr", onclick: "pilihElement('images')", elms: [
-                        { elm: "td", text: "Images" }
-                    ]}
-                ]}
+                {elm: "tbody", elms: element}
             ]}
         ]
     });
 
-    fetch('komponen.json')
-        .then(response => response.json())
-        .then(data => {
-            let template = [];
-            let i = 0;
-            for(let dd of data.component){
-                template.push({elm:"tr", elms:[
-                    {elm:"td", text:dd.name, onclick:`modalPilihTemplate(${i})`}
-                ]});
-                i++;
-            }
+    for(let dd of data.component){
+        template.push({elm:"tr", elms:[
+            {elm:"td", text:dd.name, onclick:`modalPilihTemplate(${i})`}
+        ]});
+        i++;
+    }
 
-            rendElm({to:"#tbodyTemplateElement", elm:template});
-        })
-        .catch(error => {
-            console.error('Terjadi kesalahan:', error);
-        });
+    rendElm({to:"#tbodyTemplateElement", elm:template});
 
     handleMain();
 }
 
 main();
 
-function modalPilihTemplate(idx){
-    fetch('komponen.json')
-        .then(response => response.json())
-        .then(data => {
-            let template = []
-            let i = 0;
-            for(let dd of data.component[idx].elm){
-                template.push({elm:"div", cls:"card shadow mb-2", onclick:`__handlePilihTemplate(${idx}, ${i})`, elms:[
-                    {elm:"div", cls:"card-header", text:""},
-                    {elm:"div", cls:"card-body", elms:[dd]}
-                ]});
-                i++;
-            }
-            rendElm({to:"#divModalBodyTemplate", elm:template});
-            const myModal = new bootstrap.Modal(GI('modalTemplate'), {});
-            myModal.show();
-        })
-        .catch(error => {
-            console.error('Terjadi kesalahan:', error);
-        });
+async function modalPilihTemplate(idx){
+    let data = await api("komponen.json");
+    let template = [], i = 0;
+    for(let dd of data.component[idx].elm){
+        template.push({elm:"div", cls:"card shadow mb-2", onclick:`__handlePilihTemplate(${idx}, ${i})`, elms:[
+            {elm:"div", cls:"card-header", text:""},
+            {elm:"div", cls:"card-body", elms:[dd]}
+        ]});
+        i++;
+    }
+    rendElm({to:"#divModalBodyTemplate", elm:template});
+    const myModal = new bootstrap.Modal(GI('modalTemplate'), {});
+    myModal.show();
 }
 
-function __handlePilihTemplate(i, ii){
-    fetch('komponen.json')
-        .then(response => response.json())
-        .then(data => {
-            let template = data.component[i].elm[ii];
-            elmToElm(template);
-            localStorage.setItem("Elms", JSON.stringify(__Elms));
-            handleMain();
-            GI("btnTutupModalTemplate").click();
-        })
-        .catch(error => {
-            console.error('Terjadi kesalahan:', error);
-        });
+async function __handlePilihTemplate(i, ii){
+    let data = await api("komponen.json");
+    let template = data.component[i].elm[ii];
+    elmToElm(template);
+    localStorage.setItem("Elms", JSON.stringify(__Elms));
+    handleMain();
 }
 
 function __handleExIm(e){
@@ -1047,7 +1059,7 @@ GI("main").addEventListener("click", (e)=>{
             {elm:"p"},
             {elm:"div", cls:"d-flex justofy-content-center align-items-center gap-1", elms:[
                 {elm: "button", type: "submit", cls: "btn btn-primary", text: "Simpan"},
-                {elm: "button", type: "button", onclick:"__handleAddAttr('divAddAttrEdit')", cls: "btn btn-warning", text: "Tambah Atribut"},
+                {elm: "button", type: "button", onclick:"__handleAddAttr('divAddAttrEdit')", cls: "btn btn-warning", text: "+ Atribut"},
                 {elm: "button", type: "button", onclick:"__handleHapusElm()", cls: "btn btn-danger", text: "Hapus"},
             ]}
         ] });

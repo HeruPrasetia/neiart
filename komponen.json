@@ -1385,5 +1385,16 @@
                 ]
             }
         ]}
+    ],
+    "element":[
+        {"Name":"Header", "Value":"H"},
+        {"Name":"Input", "Value":"input"},
+        {"Name":"Button", "Value":"button"},
+        {"Name":"Table", "Value":"table"},
+        {"Name":"Grid", "Value":"grid"},
+        {"Name":"DIV", "Value":"div"},
+        {"Name":"Image", "Value":"images"},
+        {"Name":"Script", "Value":"script"},
+        {"Name":"Style", "Value":"style"}
     ]
 }

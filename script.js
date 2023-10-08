@@ -1,6 +1,7 @@
 let __ElmType = "H",
     __Elms = localStorage.getItem("Elms") ? JSON.parse(localStorage.getItem("Elms")) : [],
     arrOption = [], arrTable = [], __elmIdx = [];
+console.log(__Elms);
 
 function pilihElement(elm) {
     switch (elm) {
@@ -188,6 +189,7 @@ function pilihElement(elm) {
         case 'div':{
             rendElm({
                 to: "#modalBody", elm: [
+                    {elm:"input", type:"hidden", name:"elm", value:"div", cls:"cls-input"},
                     {elm: "div", cls: "form-group", elms: [
                         {elm: "label", text: "Text" },
                         {elm: "input", type: "text", id: "edtText", name:"text", cls: "form-control cls-input"}
@@ -1093,20 +1095,23 @@ function showCard(e) {
             currentCard.remove();
         }
     
-        var card = document.createElement('div');
+        let card = document.createElement('div'),
+            mainDiv = document.getElementById("main"),
+            elm = e.target,
+            count = 0,
+            currentElement = elm,
+            ii = [],
+            tempELm = __Elms,
+            elmToRend = [];
         card.className = 'card shadow';
         card.id = "cardEdit";
         card.style.width = "300px";
-        card.style.left = (e.clientX - 200) + 'px';
-        card.style.top = (e.clientY - 10) + 'px';    
-        document.getElementById('main').appendChild(card);
+        card.style.left = (e.clientX - mainDiv.clientWidth / 3.5) + 'px';
+        card.style.top = (e.clientY - mainDiv.clientHeight / 2.8) + 'px';    
+        mainDiv.appendChild(card);
         card.style.display = 'block';
         currentCard = card;
         e.preventDefault();
-        let elm = e.target;
-        let count = 0;
-        let currentElement = elm;
-        let ii = [];
 
         while (currentElement.parentNode) {
             if (currentElement.id === "main") break;
@@ -1120,10 +1125,8 @@ function showCard(e) {
         }
         
         __elmIdx = ii.reverse();
-        let tempELm = __Elms;
         for (let i = 0; i < __elmIdx.length; i++) tempELm = tempELm.elms !== undefined ? tempELm.elms[__elmIdx[i]] : tempELm[__elmIdx[i]];
-        let elmToRend = [];
-        for (var key in tempELm) {
+        for (let key in tempELm) {
             if (tempELm.hasOwnProperty(key)) {
                 if (key == "elms") {
                     rendElm({ to: "#divEdit", elm: tempELm.elms });

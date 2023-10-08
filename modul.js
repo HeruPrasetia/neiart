@@ -157,13 +157,6 @@ function api(url, data = []) {
             fetch(encodeURI(url))
                 .then(response => response.text())
                 .then(hasil => {
-                    if (location.hostname == "localhost") {
-                        if (isJson(hasil)) {
-                            console.log(JSON.parse(hasil));
-                        } else {
-                            console.log(hasil);
-                        }
-                    }
                     try {
                         if (isJson(hasil)) {
                             resolve(JSON.parse(hasil));
@@ -185,13 +178,6 @@ function api(url, data = []) {
             })
                 .then(response => response.text())
                 .then(hasil => {
-                    if (location.hostname == "localhost") {
-                        if (isJson(hasil)) {
-                            console.log(JSON.parse(hasil));
-                        } else {
-                            console.log(hasil);
-                        }
-                    }
                     try {
                         if (isJson(hasil)) {
                             resolve(JSON.parse(hasil));

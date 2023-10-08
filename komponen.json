@@ -1387,7 +1387,7 @@
         ]}
     ],
     "element":[
-        {"Name":"Header", "Value":"H"},
+        {"Name":"Header", "Value":"H1"},
         {"Name":"Input", "Value":"input"},
         {"Name":"Button", "Value":"button"},
         {"Name":"Table", "Value":"table"},
